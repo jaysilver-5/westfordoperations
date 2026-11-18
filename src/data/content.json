@@ -1,0 +1,822 @@
+{
+  "home": {
+    "hero": {
+      "eyebrow": "Managed e-commerce operations",
+      "title": "Keep your stores moving. We handle the day-to-day.",
+      "description": "We help e-commerce agencies and growing brands manage product updates, orders and customer support through clear processes and quality checks."
+    },
+    "everyday": {
+      "intro": {
+        "eyebrow": "The everyday work",
+        "title": "When everyday work starts holding things up.",
+        "description": "Product changes, order exceptions and customer questions can pull your team away from client delivery and growing the business."
+      },
+      "items": [
+        {
+          "title": "Updates waiting to go live",
+          "description": "Product details, collections and approved stock changes waiting to be checked and published."
+        },
+        {
+          "title": "Orders needing a follow-up",
+          "description": "Shipment questions and fulfilment exceptions without a clear next step or owner."
+        },
+        {
+          "title": "Customer requests changing hands",
+          "description": "Enquiries and returns passed between inboxes, people and teams."
+        }
+      ],
+      "close": "Start with the workflow creating the most friction. We agree the scope, assign ownership and keep the work visible."
+    },
+    "services": {
+      "intro": {
+        "eyebrow": "How we can help",
+        "title": "Practical support across your store operations.",
+        "description": "Support for agencies managing client stores and brands running their own. Choose the work you need covered, then agree the scope with us."
+      },
+      "items": [
+        {
+          "title": "Store & catalogue",
+          "description": "Product setup, variants, collections and approved pricing or stock updates.",
+          "action": {
+            "label": "View scope",
+            "href": null,
+            "mode": null,
+            "service": null,
+            "audience": null
+          },
+          "key": "store",
+          "icon": 0
+        },
+        {
+          "title": "Orders & fulfilment administration",
+          "description": "Order monitoring, shipment tracking and coordination when exceptions need attention.",
+          "action": {
+            "label": "View scope",
+            "href": null,
+            "mode": null,
+            "service": null,
+            "audience": null
+          },
+          "key": "orders",
+          "icon": 1
+        },
+        {
+          "title": "Customer support",
+          "description": "Email, chat and social enquiries, plus returns handled under your policies.",
+          "action": {
+            "label": "View scope",
+            "href": null,
+            "mode": null,
+            "service": null,
+            "audience": null
+          },
+          "key": "support",
+          "icon": 2
+        },
+        {
+          "title": "Marketplaces & multichannel",
+          "description": "Listings, feed checks and channel upkeep across agreed platforms.",
+          "action": {
+            "label": "View scope",
+            "href": null,
+            "mode": null,
+            "service": null,
+            "audience": null
+          },
+          "key": "marketplaces",
+          "icon": 3
+        },
+        {
+          "title": "Marketing operations",
+          "description": "Campaign merchandising, email implementation, promotions and approved content updates.",
+          "action": {
+            "label": "View scope",
+            "href": null,
+            "mode": null,
+            "service": null,
+            "audience": null
+          },
+          "key": "marketing",
+          "icon": 4
+        },
+        {
+          "title": "Technical store support",
+          "description": "Scoped theme changes, app setup, store fixes and specialist integration projects.",
+          "action": {
+            "label": "View scope",
+            "href": null,
+            "mode": null,
+            "service": null,
+            "audience": null
+          },
+          "key": "technical",
+          "icon": 5
+        }
+      ],
+      "note": "Workload, coverage and approval rules are agreed for each engagement. Specialist services are confirmed after a scope and delivery review."
+    },
+    "process": {
+      "intro": {
+        "eyebrow": "How we work",
+        "title": "A clear process from scope to delivery.",
+        "description": "We agree the work, establish ownership and keep progress visible at each stage."
+      },
+      "items": [
+        {
+          "title": "Discover",
+          "description": "Understand your stores, workload and the tasks taking time."
+        },
+        {
+          "title": "Scope",
+          "description": "Agree deliverables, limits, approvals and coverage."
+        },
+        {
+          "title": "Staff",
+          "description": "Confirm the operator, service owner and reviewer for the agreed work."
+        },
+        {
+          "title": "Run",
+          "description": "Carry out approved tasks using documented processes and handoffs."
+        },
+        {
+          "title": "Report",
+          "description": "Share progress, exceptions and work awaiting your approval."
+        }
+      ]
+    },
+    "agency": {
+      "intro": {
+        "eyebrow": "For agencies",
+        "title": "Operational support behind your agency.",
+        "description": "Bring recurring store work into a delivery arrangement built around your client relationships and service standards."
+      },
+      "items": [
+        {
+          "title": "White-label delivery",
+          "description": "Agree how Westford fits into your delivery process, including reporting and client communications."
+        },
+        {
+          "title": "Your client relationships",
+          "description": "Your agency retains the client relationship and approves any direct client contact."
+        },
+        {
+          "title": "Clear handoffs",
+          "description": "Each request has an agreed owner, source information and approval path."
+        }
+      ]
+    },
+    "principles": {
+      "intro": {
+        "eyebrow": "The controls behind the work",
+        "title": "Work you can follow and review.",
+        "description": "Clear permissions, agreed limits and documented decisions make day-to-day delivery easier to oversee."
+      },
+      "items": [
+        {
+          "title": "Approved access",
+          "description": "Use individual, client-approved access with permissions limited to the agreed work."
+        },
+        {
+          "title": "Documented processes",
+          "description": "Follow agreed instructions and record material changes, handoffs and outstanding decisions."
+        },
+        {
+          "title": "Scoped work",
+          "description": "Define tasks, volumes and coverage before starting. Agree changes before additional work proceeds."
+        },
+        {
+          "title": "Independent quality checks",
+          "description": "Review high-risk changes separately against the approved request, with checks matched to the work."
+        }
+      ]
+    },
+    "review": {
+      "intro": {
+        "eyebrow": "Find your starting point",
+        "title": "A clearer plan starts with one workflow.",
+        "description": "Tell us where the day-to-day work gets held up. Your free operations review brings three practical next steps together in a concise one-page plan."
+      },
+      "action": {
+        "label": "Get my free operations review",
+        "href": null,
+        "mode": "review",
+        "service": null,
+        "audience": null
+      }
+    }
+  },
+  "services": {
+    "hero": {
+      "eyebrow": "Services",
+      "title": "Operational support, scoped to your stores.",
+      "description": "For agencies managing client stores and brands running their own. Bring recurring work into a clear scope, with named ownership and quality checks."
+    },
+    "scopes": [
+      {
+        "id": "scope-store",
+        "key": "store",
+        "eyebrow": "01 / Store operations",
+        "title": "Store & catalogue",
+        "description": "Keep product information and approved store updates consistent.",
+        "tasks": [
+          "Product setup, variants and collections.",
+          "Approved price, stock and merchandising updates.",
+          "Product data checks and material change records."
+        ],
+        "condition": "Work is based on your approved source data, permissions and review rules. Workload and delivery capacity are confirmed during scoping.",
+        "action": {
+          "label": "Discuss store operations",
+          "href": null,
+          "mode": "general",
+          "service": "store",
+          "audience": null
+        }
+      },
+      {
+        "id": "scope-orders",
+        "key": "orders",
+        "eyebrow": "02 / Order administration",
+        "title": "Orders & fulfilment administration",
+        "description": "Give order follow-ups and fulfilment exceptions a clear owner.",
+        "tasks": [
+          "Order queue monitoring and shipment status checks.",
+          "Exception records and follow-up on agreed next steps.",
+          "Coordination with approved suppliers and fulfilment partners."
+        ],
+        "condition": "We coordinate within your existing fulfilment setup. Coverage, escalation contacts and authority limits are agreed before work starts.",
+        "action": {
+          "label": "Discuss order support",
+          "href": null,
+          "mode": "general",
+          "service": "orders",
+          "audience": null
+        }
+      },
+      {
+        "id": "scope-support",
+        "key": "support",
+        "eyebrow": "03 / Customer experience",
+        "title": "Customer support",
+        "description": "Handle customer requests through a consistent process and tone of voice.",
+        "tasks": [
+          "Email, chat and social enquiries across agreed channels.",
+          "Support ticket organisation and follow-up.",
+          "Approved returns and refund administration within your limits."
+        ],
+        "condition": "Channels, coverage, response guidance and refund authority are agreed before work starts.",
+        "action": {
+          "label": "Discuss customer support",
+          "href": null,
+          "mode": "general",
+          "service": "support",
+          "audience": null
+        }
+      },
+      {
+        "id": "scope-marketplaces",
+        "key": "marketplaces",
+        "eyebrow": "04 / Specialist support",
+        "title": "Marketplaces & multichannel",
+        "description": "Keep agreed listings, feeds and channel issues organised.",
+        "tasks": [
+          "Listing setup and maintenance.",
+          "Feed checks and channel health reviews.",
+          "Issue records and approved platform escalations."
+        ],
+        "condition": "Specialist scope. Platforms, permissions and delivery expertise are confirmed before quotation.",
+        "action": {
+          "label": "Discuss channel support",
+          "href": null,
+          "mode": "general",
+          "service": "marketplaces",
+          "audience": null
+        }
+      },
+      {
+        "id": "scope-marketing",
+        "key": "marketing",
+        "eyebrow": "05 / Specialist support",
+        "title": "Marketing operations",
+        "description": "Turn approved campaign plans into coordinated store and channel updates.",
+        "tasks": [
+          "Campaign merchandising and promotion setup.",
+          "Email implementation with approved briefs and assets.",
+          "Content updates and publishing coordination."
+        ],
+        "condition": "Specialist scope. Delivery expertise is confirmed first. Strategy and paid-media management are separately assessed.",
+        "action": {
+          "label": "Discuss marketing operations",
+          "href": null,
+          "mode": "general",
+          "service": "marketing",
+          "audience": null
+        }
+      },
+      {
+        "id": "scope-technical",
+        "key": "technical",
+        "eyebrow": "06 / Specialist support",
+        "title": "Technical store support",
+        "description": "Make agreed store changes with a scoped technical plan.",
+        "tasks": [
+          "Theme maintenance, app setup and agreed minor fixes.",
+          "Issue assessment and dependency checks.",
+          "Separately scoped migrations and integrations."
+        ],
+        "condition": "Specialist scope. A vetted technical lead reviews requirements, access and dependencies before a proposal.",
+        "action": {
+          "label": "Discuss technical support",
+          "href": null,
+          "mode": "general",
+          "service": "technical",
+          "audience": null
+        }
+      }
+    ],
+    "approach": {
+      "intro": {
+        "eyebrow": "A clear working agreement",
+        "title": "What the agreed scope covers.",
+        "description": "The proposal sets the tasks, limits and approvals. Reporting and review follow the work agreed."
+      },
+      "columns": [
+        {
+          "title": "Included in the agreed scope",
+          "tasks": [
+            "Named ownership and documented handoffs.",
+            "Task status, exceptions and reporting at an agreed cadence.",
+            "Quality checks and records of material changes."
+          ]
+        },
+        {
+          "title": "Subject to separate scope",
+          "tasks": [
+            "Additional stores, volumes or workflows.",
+            "Migrations, integrations and marketplace launches.",
+            "Advanced marketing work or changes to service coverage."
+          ]
+        }
+      ],
+      "note": "Additional work is reviewed and approved before it starts."
+    },
+    "faq": {
+      "intro": {
+        "eyebrow": "Before we begin",
+        "title": "A few practical questions.",
+        "description": "A starting point for deciding what to bring into scope."
+      },
+      "items": [
+        {
+          "q": "Can we start with one workflow?",
+          "a": "Yes. Start with one store or a defined workflow, then agree the tasks, workload and approvals. Additional work is reviewed before the scope changes."
+        },
+        {
+          "q": "Can you support several client stores?",
+          "a": "Agency engagements can cover named stores under a shared delivery arrangement. We agree workload limits, handoffs and reporting for the portfolio."
+        },
+        {
+          "q": "Which platforms can you work with?",
+          "a": "Tell us which platforms you use. We confirm relevant experience, access and delivery capacity before quoting a service or specialist project."
+        },
+        {
+          "q": "How do you quote the work?",
+          "a": "A quote reflects the service, workload, complexity, coverage and review required. The scope and delivery capacity are confirmed before a proposal."
+        },
+        {
+          "q": "What does the free operations review include?",
+          "a": "One workflow, using information you share, with three practical next steps in a concise one-page plan. No store login or customer records are required. Implementation is scoped separately."
+        }
+      ]
+    },
+    "cta": {
+      "intro": {
+        "eyebrow": "Find your starting point",
+        "title": "Start with a free operations review.",
+        "description": "One workflow. Three practical next steps. No store login required."
+      },
+      "action": {
+        "label": "Get my free operations review",
+        "href": null,
+        "mode": "review",
+        "service": null,
+        "audience": null
+      }
+    }
+  },
+  "agencies": {
+    "hero": {
+      "eyebrow": "For agencies",
+      "title": "Operational support. Built around your agency.",
+      "description": "Managed e-commerce support for agencies handling recurring work across client stores. Keep your client relationships while we take care of the workflows you bring into scope."
+    },
+    "split": {
+      "intro": {
+        "eyebrow": "Behind your delivery",
+        "title": "A clear place in your delivery team.",
+        "description": "Recurring requests need clear ownership. We agree where Westford fits, how work reaches us and what comes back to your team."
+      },
+      "points": [
+        {
+          "title": "Your relationships stay yours",
+          "description": "Your agency leads the client relationship. Any direct client contact follows your approval and communication rules."
+        },
+        {
+          "title": "White-label delivery, clearly defined",
+          "description": "Agree how Westford appears in your workflow, including reporting, handoffs and client-facing communication."
+        },
+        {
+          "title": "Work you can follow",
+          "description": "A named service owner coordinates the agreed work, with task status, quality checks and exceptions visible to your team."
+        }
+      ]
+    },
+    "support": {
+      "intro": {
+        "eyebrow": "Where we fit",
+        "title": "Support across the everyday work.",
+        "description": "Bring one workflow or a defined set of client stores into scope."
+      },
+      "items": [
+        {
+          "title": "Store & catalogue upkeep",
+          "description": "Product information, variants, collections and approved updates that keep returning to your delivery queue.",
+          "action": {
+            "label": "View store support",
+            "href": "/services#scope-store",
+            "mode": null,
+            "service": null,
+            "audience": null
+          }
+        },
+        {
+          "title": "Orders & customer requests",
+          "description": "Order follow-ups, fulfilment exceptions and customer enquiries, handled within each client's policies and authority limits.",
+          "action": {
+            "label": "View order support",
+            "href": "/services#scope-orders",
+            "mode": null,
+            "service": null,
+            "audience": null
+          }
+        },
+        {
+          "title": "Campaigns & specialist changes",
+          "description": "Marketing implementation, marketplace upkeep and technical store work, with the required expertise confirmed before a proposal.",
+          "action": {
+            "label": "View marketing operations",
+            "href": "/services#scope-marketing",
+            "mode": null,
+            "service": null,
+            "audience": null
+          }
+        }
+      ]
+    },
+    "workflow": {
+      "intro": {
+        "eyebrow": "Working together",
+        "title": "From your brief to reviewed work.",
+        "description": ""
+      },
+      "items": [
+        {
+          "title": "Agree the scope",
+          "description": "Define the stores, tasks, volumes and coverage. Confirm delivery capacity, commercial terms and the service owner."
+        },
+        {
+          "title": "Set up the handoff",
+          "description": "Agree source information, access, approvals and escalation contacts. Document how requests enter the workflow."
+        },
+        {
+          "title": "Run, check and report",
+          "description": "Carry out approved work, review outputs and share progress at an agreed cadence. Flag decisions that need your team."
+        }
+      ],
+      "footnote": "Changes to stores, workload or coverage are reviewed before the scope expands."
+    },
+    "faq": {
+      "intro": {
+        "eyebrow": "Before we begin",
+        "title": "Questions about the partnership.",
+        "description": "Start with an arrangement your team can oversee."
+      },
+      "items": [
+        {
+          "q": "Can we start with one client store?",
+          "a": "Yes. Begin with a defined workflow for one store. Additional stores and workloads are assessed before expanding the engagement."
+        },
+        {
+          "q": "Will you speak directly to our clients?",
+          "a": "Only through the arrangement your agency approves. We agree who communicates, what can be discussed and which decisions stay with you."
+        },
+        {
+          "q": "Can you use our existing tools?",
+          "a": "Share your task, store and support tools during scoping. We confirm suitability, permissions and any required seats before work begins."
+        }
+      ]
+    },
+    "cta": {
+      "intro": {
+        "eyebrow": "Find your starting point",
+        "title": "Bring us the workflow that keeps getting stuck.",
+        "description": "Start with a free review of one workflow. Take away three practical next steps in a one-page plan. No store login required."
+      },
+      "action": {
+        "label": "Get my free operations review",
+        "href": null,
+        "mode": "review",
+        "service": null,
+        "audience": "agency"
+      }
+    }
+  },
+  "brands": {
+    "hero": {
+      "eyebrow": "For brands",
+      "title": "More room to grow. Less work left waiting.",
+      "description": "Managed e-commerce operations for growing brands. Get practical support with the recurring work behind your store, while your team keeps control of the decisions that matter."
+    },
+    "split": {
+      "intro": {
+        "eyebrow": "The work behind the store",
+        "title": "Make space for your next priority.",
+        "description": "Product changes, order queries and campaign updates can interrupt the whole day. Give that work a clear place to go."
+      },
+      "points": [
+        {
+          "title": "A clear owner for recurring work",
+          "description": "Agree who handles each task, what information they need and where questions should go."
+        },
+        {
+          "title": "Your policies and decisions",
+          "description": "Keep authority over pricing, refunds and customer commitments. We work within your approved instructions and limits."
+        },
+        {
+          "title": "Progress you can follow",
+          "description": "See completed work, open issues and decisions awaiting your input through agreed updates and change records."
+        }
+      ]
+    },
+    "support": {
+      "intro": {
+        "eyebrow": "Practical support",
+        "title": "Support across your store.",
+        "description": "Bring us the work that keeps returning to your team’s list."
+      },
+      "items": [
+        {
+          "title": "Products kept in order",
+          "description": "Product details, variants, collections and approved price or stock updates, with checks against your source information.",
+          "action": {
+            "label": "Explore store support",
+            "href": "/services#scope-store",
+            "mode": null,
+            "service": null,
+            "audience": null
+          }
+        },
+        {
+          "title": "Customer requests moving forward",
+          "description": "Order questions, support enquiries and returns followed through under your policies, with exceptions brought back to your team.",
+          "action": {
+            "label": "Explore customer support",
+            "href": "/services#scope-support",
+            "mode": null,
+            "service": null,
+            "audience": null
+          }
+        },
+        {
+          "title": "Launch details coordinated",
+          "description": "Approved promotions, campaign merchandising and content updates brought together around your launch plan.",
+          "action": {
+            "label": "Explore marketing operations",
+            "href": "/services#scope-marketing",
+            "mode": null,
+            "service": null,
+            "audience": null
+          }
+        }
+      ]
+    },
+    "workflow": {
+      "intro": {
+        "eyebrow": "A manageable starting point",
+        "title": "Start with one workflow.",
+        "description": "A focused scope makes responsibilities and progress easier to follow."
+      },
+      "items": [
+        {
+          "title": "Choose the work",
+          "description": "Identify the recurring task, current friction and approximate workload."
+        },
+        {
+          "title": "Agree the handoff",
+          "description": "Confirm access, instructions, decision limits and the person responsible for approvals."
+        },
+        {
+          "title": "Review the delivery",
+          "description": "Follow progress and quality checks. Agree any additional work before expanding the scope."
+        }
+      ],
+      "footnote": "Coverage, capacity and specialist expertise are confirmed before work begins."
+    },
+    "faq": {
+      "intro": {
+        "eyebrow": "Before we begin",
+        "title": "Practical details, agreed upfront.",
+        "description": "A few questions about bringing support into your store."
+      },
+      "items": [
+        {
+          "q": "Can you work alongside our existing team?",
+          "a": "Yes. We define the tasks Westford owns, the decisions your team retains and how work moves between us. Your existing tools and processes are reviewed during scoping."
+        },
+        {
+          "q": "Will you need access for the free review?",
+          "a": "No store login is needed. Describe one workflow and its workload. The review brings three practical next steps into a one-page plan. Implementation is scoped separately."
+        },
+        {
+          "q": "Can the support change as we grow?",
+          "a": "We review additional volumes, channels or workflows with you. Capacity, coverage and any commercial changes are agreed before the scope expands."
+        }
+      ]
+    },
+    "cta": {
+      "intro": {
+        "eyebrow": "Let’s talk operations",
+        "title": "What does your team need covered?",
+        "description": "Tell us about your store and the work taking up your day. We can define a practical starting scope together."
+      },
+      "action": {
+        "label": "Discuss support for my brand",
+        "href": null,
+        "mode": "general",
+        "service": null,
+        "audience": "brand"
+      }
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "About Westford",
+      "title": "Clear ownership for everyday operations.",
+      "description": "Westford Operations helps e-commerce agencies and growing brands manage the work that keeps stores running, with an agreed scope, documented processes and quality checks."
+    },
+    "statement": {
+      "intro": {
+        "eyebrow": "Why Westford",
+        "title": "Good operations should be easy to follow.",
+        "description": ""
+      },
+      "paragraphs": [
+        "A product update, a delayed order and a customer request may look like small tasks. Together they create a flow of work that needs context, ownership and follow-through. Our role is to bring that recurring work into a delivery process your team can oversee.",
+        "We agree what needs to happen, who can approve it and how progress will be reported. Work is then assigned, carried out and checked against that scope. Platform fit, delivery capacity and specialist requirements are confirmed before an engagement begins."
+      ]
+    },
+    "principles": {
+      "intro": {
+        "eyebrow": "Our working principles",
+        "title": "The standards behind the work.",
+        "description": ""
+      },
+      "items": [
+        {
+          "title": "A defined scope",
+          "description": "Tasks, volumes, coverage and approval limits are agreed before work starts. Additional requests are reviewed before the scope changes."
+        },
+        {
+          "title": "Named ownership",
+          "description": "Each workflow has a responsible owner and clear handoffs. Instructions, material changes and decisions are recorded so work can be followed."
+        },
+        {
+          "title": "Your decisions, respected",
+          "description": "Access is limited to the agreed work. Customer policies, sensitive changes and direct client contact follow the authority and approvals you set."
+        },
+        {
+          "title": "Checks and visibility",
+          "description": "Reviews are matched to the task, with separate checks for higher-risk changes. Progress updates include completed work, exceptions and decisions awaiting your input."
+        }
+      ]
+    },
+    "audiences": {
+      "intro": {
+        "eyebrow": "Who we work with",
+        "title": "Support that fits your team.",
+        "description": ""
+      },
+      "items": [
+        {
+          "title": "For agencies",
+          "description": "For agencies managing work across client stores. Agree how Westford supports your delivery process, with white-label arrangements, defined handoffs and your agency retaining the client relationship.",
+          "action": {
+            "label": "Explore agency support",
+            "href": "/agencies",
+            "mode": null,
+            "service": null,
+            "audience": null
+          }
+        },
+        {
+          "title": "For brands",
+          "description": "For growing brands with recurring store work to manage. Bring product updates, order follow-ups and customer requests into an agreed process, while your team keeps control of policies and decisions.",
+          "action": {
+            "label": "Explore brand support",
+            "href": "/brands",
+            "mode": null,
+            "service": null,
+            "audience": null
+          }
+        }
+      ]
+    },
+    "cta": {
+      "intro": {
+        "eyebrow": "A practical first step",
+        "title": "Find a clearer way forward.",
+        "description": "Start with a free review of one workflow. Take away three practical next steps in a concise one-page plan. No store login required."
+      },
+      "action": {
+        "label": "Get my free operations review",
+        "href": null,
+        "mode": "review",
+        "service": null,
+        "audience": null
+      }
+    }
+  },
+  "contact": {
+    "hero": {
+      "eyebrow": "Let’s talk operations",
+      "title": "A clearer starting point for your operations.",
+      "description": "Tell us what needs attention. Start with a free workflow review or discuss the support your team needs."
+    },
+    "contexts": {
+      "review": {
+        "intro": {
+          "eyebrow": "Your free operations review",
+          "title": "One workflow. A practical way forward.",
+          "description": "A focused review of one part of your day-to-day operations, with a useful plan to take away."
+        },
+        "items": [
+          {
+            "title": "A closer look at the friction",
+            "description": "Understand where work gets held up, changes hands or needs clearer ownership."
+          },
+          {
+            "title": "Three practical next steps",
+            "description": "Identify a manageable starting point and the improvements to prioritise."
+          },
+          {
+            "title": "A one-page plan to keep",
+            "description": "Bring the findings and recommended actions together in a concise summary."
+          }
+        ],
+        "assurance": "No store login required. A description of the workflow and approximate workload is enough to start."
+      },
+      "general": {
+        "intro": {
+          "eyebrow": "Support shaped around your business",
+          "title": "Start with the work you need covered.",
+          "description": "Whether you manage client stores or run your own brand, a clear brief gives us a useful place to begin."
+        },
+        "items": [
+          {
+            "title": "Understand your priorities",
+            "description": "Share the tasks, platforms and recurring issues taking your team’s time."
+          },
+          {
+            "title": "Clarify the scope",
+            "description": "Discuss workload, coverage, approvals and any specialist support needed."
+          },
+          {
+            "title": "Agree a useful next step",
+            "description": "Confirm the delivery fit before moving into a scoped proposal or engagement."
+          }
+        ],
+        "assurance": "Enquiring on behalf of clients? Select Agency in the form so we can discuss the right handoff and communication process."
+      }
+    },
+    "faq": {
+      "intro": {
+        "eyebrow": "Before you begin",
+        "title": "A few useful details.",
+        "description": ""
+      },
+      "items": [
+        {
+          "q": "Do you need access to my store?",
+          "a": "No access is needed for the initial free review. If we later agree delivery work, permissions and access are established as part of onboarding."
+        },
+        {
+          "q": "What if I need help across several services?",
+          "a": "Choose the main area of support and describe the other tasks in your brief. We can discuss how those workstreams fit into a single agreed scope."
+        },
+        {
+          "q": "What should an agency include?",
+          "a": "The number of stores, the type of recurring work and how your team currently hands it over are useful starting points. You can describe the situation without sharing client names or records."
+        }
+      ]
+    }
+  }
+}
