@@ -16,9 +16,9 @@ export function Footer() {
     if (!open && el.open) el.close();
   }, [open]);
   return <footer className="bg-paper">
-    <div className="shell grid gap-10 border-b border-line py-14 sm:grid-cols-[1.4fr_1fr_1fr] sm:gap-9 lg:gap-20 lg:py-17">
+    <div className="shell grid gap-8 border-b border-line py-10 sm:grid-cols-[1.4fr_1fr_1fr] sm:gap-9 lg:gap-16 lg:py-12">
       <div className="mx-auto max-w-[310px] text-center sm:mx-0 sm:text-left">
-        <Link href="/" aria-label="Westford Operations home" className="inline-block"><Image src="/images/westford-logo.webp" alt="Westford Operations" width={248} height={49} className="mx-auto h-auto w-[194px] sm:mx-0 sm:w-[210px]" /></Link>
+        <Link href="/" aria-label="Westford Operations home" className="inline-block"><Image src="/images/westford-logo.webp" alt="Westford Operations" width={248} height={49} className="mx-auto h-auto w-[164px] sm:mx-0 sm:w-[180px]" /></Link>
         <p className="mt-5 text-[.77rem] leading-[1.95] text-muted">Managed e-commerce operations for agencies and growing brands.</p>
       </div>
       <nav aria-label="Explore" className="flex flex-col items-center gap-1 sm:items-start">

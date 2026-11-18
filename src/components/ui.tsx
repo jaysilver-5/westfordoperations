@@ -36,24 +36,24 @@ export function SectionIntro({ data, centered = false, className = '', inverse =
   return (
     <div className={`${centered ? 'mx-auto text-center' : ''} ${className}`}>
       <Eyebrow inverse={inverse}>{data.eyebrow}</Eyebrow>
-      <h2 className={`heading-editorial mt-5 ${inverse ? 'text-ivory' : ''}`}>{data.title}</h2>
-      {data.description && <p className={`copy-muted mt-5 ${centered ? 'mx-auto' : ''} ${inverse ? '!text-[#c7d8d4]' : ''}`}>{data.description}</p>}
+      <h2 className={`heading-editorial mt-4 ${inverse ? 'text-ivory' : ''}`}>{data.title}</h2>
+      {data.description && <p className={`copy-muted mt-4 ${centered ? 'mx-auto' : ''} ${inverse ? '!text-[#c7d8d4]' : ''}`}>{data.description}</p>}
     </div>
   );
 }
 
 export function PageHero({ data, children }: { data: Intro; children?: ReactNode }) {
-  return <section className="relative overflow-hidden px-0 pb-13 pt-10 text-center sm:pb-17 sm:pt-14 lg:pb-20 lg:pt-17">
+  return <section className="relative overflow-hidden px-0 pb-9 pt-7 text-center sm:pb-11 sm:pt-9 lg:pb-12 lg:pt-10">
     <div className="pointer-events-none absolute -top-72 left-1/2 h-[490px] w-[680px] -translate-x-1/2 rounded-full bg-[#e2ebdf]/45 blur-[100px]" aria-hidden="true" />
     <div className="shell relative z-10 mx-auto flex max-w-[850px] flex-col items-center">
       <Reveal onLoad delay={0.06}><Eyebrow>{data.eyebrow}</Eyebrow></Reveal>
       <Reveal onLoad delay={0.15} className="w-full">
-        <h1 className="mt-6 font-editorial text-[clamp(2.85rem,7.1vw,4.45rem)] leading-[1.075] tracking-[-.025em] text-balance">{data.title}</h1>
+        <h1 className="mt-4 font-editorial text-[clamp(2.35rem,5.3vw,3.5rem)] leading-[1.1] tracking-[-.025em] text-balance">{data.title}</h1>
       </Reveal>
       <Reveal onLoad delay={0.23} className="w-full">
-        {data.description && <p className="copy-muted mx-auto mt-5 max-w-[645px] !text-[.86rem] sm:!text-base">{data.description}</p>}
+        {data.description && <p className="copy-muted mx-auto mt-4 max-w-[645px] !text-[.9rem] sm:!text-[.9375rem]">{data.description}</p>}
       </Reveal>
-      {children && <Reveal onLoad delay={0.3} className="mt-7 flex w-full flex-wrap items-center justify-center gap-4 sm:gap-7">{children}</Reveal>}
+      {children && <Reveal onLoad delay={0.3} className="mt-5 flex w-full flex-wrap items-center justify-center gap-3 sm:gap-6">{children}</Reveal>}
     </div>
   </section>;
 }
@@ -64,7 +64,7 @@ export function FaqSection({ data, className = '' }: { data: FaqData; className?
       <Reveal className="mx-auto max-w-[480px] text-center lg:mx-0 lg:text-left"><SectionIntro data={data.intro} /></Reveal>
       <Reveal delay={0.08} className="w-full">
         {data.items.map((item, i) => <details className="faq-item group" key={`${i}-${item.q}`}>
-          <summary className="flex min-h-[68px] list-none items-center justify-between gap-4 py-5 text-left text-[.85rem] font-semibold leading-[1.75] marker:hidden sm:text-[.9rem] [&::-webkit-details-marker]:hidden">
+          <summary className="flex min-h-[56px] list-none items-center justify-between gap-4 py-4 text-left text-[.85rem] font-semibold leading-[1.75] marker:hidden sm:text-[.9rem] [&::-webkit-details-marker]:hidden">
             <span>{item.q}</span><ChevronDown className="faq-chevron h-5 w-5 shrink-0 text-teal" strokeWidth={1.6} aria-hidden="true" />
           </summary>
           <p className="faq-answer max-w-[620px] pb-6 pr-7 text-[.81rem] leading-[1.95] text-muted">{item.a}</p>
@@ -87,7 +87,7 @@ export function ClosingCta({ data }: { data: CtaData }) {
 
 export function NumberedList({ items, inverse = false }: { items: { title: string; description: string }[]; inverse?: boolean }) {
   return <div className="w-full">
-    {items.map((item, i) => <Reveal key={item.title} delay={Math.min(i * 0.07, 0.24)} className={`grid grid-cols-[2.15rem_1fr] gap-5 border-t py-6 first:border-0 first:pt-0 ${inverse ? 'border-white/20' : 'border-line'} `}>
+    {items.map((item, i) => <Reveal key={item.title} delay={Math.min(i * 0.07, 0.24)} className={`grid grid-cols-[2.15rem_1fr] gap-4 border-t py-4 first:border-0 first:pt-0 ${inverse ? 'border-white/20' : 'border-line'} `}>
       <span aria-hidden="true" className={`number-chip ${inverse ? '!bg-white/10 !text-[#bfceaa]' : ''}`}>{String(i + 1).padStart(2, '0')}</span>
       <div><h3 className={`text-[.99rem] font-bold tracking-[-.025em] ${inverse ? 'text-white' : ''}`}>{item.title}</h3><p className={`mt-2 text-[.79rem] leading-[1.9] ${inverse ? 'text-[#c7d8d4]' : 'text-muted'}`}>{item.description}</p></div>
     </Reveal>)}
@@ -95,7 +95,7 @@ export function NumberedList({ items, inverse = false }: { items: { title: strin
 }
 
 export function ThreeStepList({ items }: { items: { title: string; description: string }[] }) {
-  return <ol className="mx-auto mt-12 grid max-w-[1040px] gap-10 md:grid-cols-3">
+  return <ol className="mx-auto mt-8 grid max-w-[1040px] gap-7 md:grid-cols-3">
     {items.map((item, i) => <Reveal as="li" key={item.title} delay={i * 0.085} className="relative border-t border-line pt-6 md:border-t-0 md:pt-0">
       <span className="number-chip !border !border-[#cdd9cc] !bg-paper">{String(i + 1).padStart(2, '0')}</span>
       <h3 className="mt-5 text-[1rem] font-semibold">{item.title}</h3>

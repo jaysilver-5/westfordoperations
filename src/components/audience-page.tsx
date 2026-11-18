@@ -24,8 +24,8 @@ export function AudiencePage({ kind }: { kind: AudienceKind }) {
     <section className="section-pad bg-softsage">
       <div className="shell">
         <Reveal className="mx-auto max-w-[700px] text-center"><SectionIntro data={d.support.intro} centered /></Reveal>
-        <div className="mt-10 grid gap-4 md:grid-cols-3 md:gap-5">
-          {d.support.items.map((s, i) => <Reveal key={s.title} delay={i * .09} className="card-soft flex h-full flex-col p-6 sm:p-7">
+        <div className="mt-8 grid gap-4 md:grid-cols-3 md:gap-5">
+          {d.support.items.map((s, i) => <Reveal key={s.title} delay={i * .09} className="card-soft flex h-full flex-col p-5 sm:p-6">
             <h3 className="text-[1.04rem] font-bold leading-[1.55]">{s.title}</h3>
             <p className="mt-3 flex-1 text-[.8rem] leading-[1.9] text-muted">{s.description}</p>
             {s.action?.href && <ArrowLink className="mt-4 justify-between" href={s.action.href}>{s.action.label}</ArrowLink>}

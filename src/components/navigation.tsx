@@ -38,9 +38,9 @@ export function Header() {
   }, [open]);
 
   return <header id="page-top" className={`sticky top-0 z-50 border-b backdrop-blur-xl transition-[background,border-color,box-shadow] duration-300 ${scrolled ? 'border-line/90 bg-paper/96 shadow-[0_5px_24px_#17343d09]' : 'border-transparent bg-paper/95'}`}>
-    <div className="shell flex min-h-[78px] items-center justify-between gap-6 py-3.5 sm:min-h-[89px] lg:min-h-[98px]">
+    <div className="shell flex min-h-[68px] items-center justify-between gap-5 py-2.5 lg:min-h-[76px]">
       <Link href="/" aria-label="Westford Operations home" className="relative z-20 shrink-0" onClick={() => setOpen(false)}>
-        <Image src="/images/westford-logo.webp" alt="Westford Operations" width={248} height={49} priority className="h-auto w-[166px] object-contain sm:w-[190px] xl:w-[205px]" />
+        <Image src="/images/westford-logo.webp" alt="Westford Operations" width={248} height={49} priority className="h-auto w-[156px] object-contain sm:w-[170px] xl:w-[180px]" />
       </Link>
       <nav className="hidden items-center gap-4 lg:flex xl:gap-7" aria-label="Main navigation">
         {navItems.map((item) => {

@@ -22,18 +22,18 @@ export function ServiceCards({ cards, scopes }: { cards: Card[]; scopes: Scope[]
   }, [selected]);
 
   return <>
-    <div className="mt-11 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {cards.map((card, i) => {
         const Icon = icons[i % icons.length];
         return <Reveal key={card.key} delay={(i % 3) * .08}>
-          <article className="card-soft group flex h-full min-h-[245px] flex-col p-6 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-[#afc3b4] hover:shadow-[0_16px_34px_#17343d12] sm:p-7">
+          <article className="card-soft group flex h-full flex-col p-5 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-[#afc3b4] hover:shadow-[0_16px_34px_#17343d12] sm:p-6">
             <div className="flex items-center justify-between">
-              <span className="flex h-11 w-11 items-center justify-center rounded-[10px] border border-[#dce5db] bg-[#f0f4ec] text-teal"><Icon size={23} strokeWidth={1.45} aria-hidden="true" /></span>
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#dce5db] bg-[#f0f4ec] text-teal"><Icon size={20} strokeWidth={1.45} aria-hidden="true" /></span>
               <span className="text-[.65rem] font-semibold tabular-nums text-[#7b8b7e]">{String(i + 1).padStart(2, '0')}</span>
             </div>
-            <h3 className="mt-5 text-[1.03rem] font-bold leading-[1.5] tracking-[-.025em]">{card.title}</h3>
-            <p className="mt-2.5 flex-1 text-[.8rem] leading-[1.88] text-muted">{card.description}</p>
-            <button type="button" onClick={() => setSelected(card.key)} aria-label={`View scope for ${card.title}`} className="mt-5 flex min-h-10 w-full items-center justify-between gap-3 border-t border-line/70 pt-3 text-left text-[.77rem] font-bold transition-colors group-hover:text-teal">
+            <h3 className="mt-4 text-[1rem] font-bold leading-[1.5] tracking-[-.025em]">{card.title}</h3>
+            <p className="mt-2 flex-1 text-[.8rem] leading-[1.8] text-muted">{card.description}</p>
+            <button type="button" onClick={() => setSelected(card.key)} aria-label={`View scope for ${card.title}`} className="mt-4 flex min-h-11 w-full items-center justify-between gap-3 border-t border-line/70 pt-2 text-left text-[.77rem] font-bold transition-colors group-hover:text-teal">
               View scope <ArrowRight size={17} strokeWidth={1.6} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </button>
           </article>

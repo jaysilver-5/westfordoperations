@@ -16,27 +16,27 @@ const principleIcons = [LockKeyhole, ClipboardCheck, BadgeCheck, ShieldCheck];
 
 export default function HomePage() {
   return <main id="main-content">
-    <section id="home" aria-labelledby="hero-heading" className="relative overflow-hidden pt-8 sm:pt-11 lg:pt-12">
+    <section id="home" aria-labelledby="hero-heading" className="relative overflow-hidden pt-6 sm:pt-7 lg:pt-8">
       <div className="hero-ambient pointer-events-none absolute left-1/2 top-5 -z-0 h-72 w-[680px] -translate-x-1/2 rounded-full bg-[#e1e9dd]/55 blur-[100px]" aria-hidden="true" />
       <div className="shell relative z-10 text-center">
         <Reveal onLoad delay={0.02}><Eyebrow>{h.hero.eyebrow}</Eyebrow></Reveal>
         <Reveal onLoad delay={0.13}>
-          <h1 id="hero-heading" className="mx-auto mt-6 max-w-[1040px] text-[clamp(2.12rem,5.15vw,4.2rem)] font-semibold leading-[1.15] tracking-[-.045em] text-balance">
+          <h1 id="hero-heading" className="mx-auto mt-4 max-w-[880px] text-[clamp(2rem,4.1vw,3.375rem)] font-semibold leading-[1.13] tracking-[-.045em] text-balance">
             Keep your stores moving.<br /> We handle the <em className="font-editorial text-[1.1em] font-normal tracking-[-.035em] text-teal">day-to-day.</em>
           </h1>
         </Reveal>
         <Reveal onLoad delay={0.22}>
-          <p className="copy-muted mx-auto mt-6 max-w-[690px] !text-[.9rem] sm:!text-base">{h.hero.description}</p>
+          <p className="copy-muted mx-auto mt-4 max-w-[650px] !text-[.9rem] sm:!text-[.9375rem]">{h.hero.description}</p>
         </Reveal>
-        <Reveal onLoad delay={0.31} className="mt-7 flex flex-col items-center justify-center gap-2 sm:flex-row sm:gap-7">
+        <Reveal onLoad delay={0.31} className="mt-5 flex flex-col items-center justify-center gap-2 sm:flex-row sm:gap-6">
           <EnquiryLink className="w-full max-w-[340px] sm:w-auto" mode="review">Get my free operations review</EnquiryLink>
           <ArrowLink className="justify-center" href="/services">Explore our services</ArrowLink>
         </Reveal>
         <Reveal onLoad delay={0.38}>
-          <p className="mt-4 text-[.73rem] leading-[1.9] text-[#61726f]">One workflow. Three practical next steps. <span className="mx-2 hidden text-[#9aab9a] sm:inline">•</span><span className="block sm:inline">No store login required.</span></p>
+          <p className="mt-3 text-[.73rem] leading-[1.9] text-[#61726f]">One workflow. Three practical next steps. <span className="mx-2 hidden text-[#9aab9a] sm:inline">•</span><span className="block sm:inline">No store login required.</span></p>
         </Reveal>
-        <Reveal onLoad delay={0.4} distance={13} className="relative mx-auto mt-9 h-[158px] overflow-hidden rounded-xl shadow-[0_20px_35px_-28px_#17343d88] sm:h-[230px] lg:mt-11 lg:h-[277px]">
-          <Image src="/images/westford-workspace.webp" fill priority sizes="(max-width: 640px) 94vw, (max-width: 1024px) 90vw, 1200px" alt="A quiet sunlit workspace with a notebook and laptop" className="object-cover object-[center_62%]" />
+        <Reveal onLoad delay={0.4} distance={13} className="relative mx-auto mt-6 h-[140px] overflow-hidden rounded-xl shadow-[0_20px_35px_-28px_#17343d88] sm:h-[clamp(150px,25svh,210px)]">
+          <Image src="/images/westford-workspace.webp" fill priority sizes="(max-width: 640px) 94vw, (max-width: 1024px) 90vw, 1120px" alt="A quiet sunlit workspace with a notebook and laptop" className="object-cover object-[center_62%]" />
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-xl border border-ink/5" />
         </Reveal>
       </div>
@@ -72,7 +72,7 @@ export default function HomePage() {
     <section id="how-we-work" aria-labelledby="process-heading" className="section-pad">
       <div className="shell">
         <Reveal className="mx-auto max-w-[680px] text-center"><SectionIntro data={h.process.intro} centered className="max-w-[580px]" /></Reveal>
-        <ol className="mx-auto mt-12 grid max-w-[1030px] gap-0 sm:grid-cols-2 sm:gap-x-5 lg:grid-cols-5 lg:gap-0" aria-label="Five stages of an engagement">
+        <ol className="mx-auto mt-8 grid max-w-[1030px] gap-0 sm:grid-cols-2 sm:gap-x-5 lg:grid-cols-5 lg:gap-0" aria-label="Five stages of an engagement">
           {h.process.items.map((step, i) => <Reveal key={step.title} as="li" delay={i * .075} className="relative grid grid-cols-[42px_1fr] gap-x-4 pb-8 last:pb-0 sm:block sm:pb-10 lg:pb-0 lg:pr-5">
             {i < h.process.items.length - 1 && <span aria-hidden="true" className="absolute bottom-0 left-[21px] top-[42px] w-px bg-[#d5dfd3] sm:hidden lg:left-[42px] lg:top-[21px] lg:h-px lg:w-[calc(100%-42px)]" />}
             <span className={`relative z-10 inline-flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[#cdd9cc] text-[.67rem] font-bold tabular-nums ${i === 0 ? 'border-teal bg-teal text-white' : 'bg-paper text-teal'}`}>{String(i + 1).padStart(2, '0')}</span>
@@ -86,7 +86,7 @@ export default function HomePage() {
       </div>
     </section>
 
-    <section id="for-agencies" aria-labelledby="agency-heading" className="relative mx-3 overflow-hidden rounded-2xl bg-forest py-15 text-white sm:mx-5 sm:py-19 lg:mx-auto lg:w-[min(1280px,calc(100%-3rem))] lg:py-22">
+    <section id="for-agencies" aria-labelledby="agency-heading" className="relative mx-3 overflow-hidden rounded-2xl bg-forest py-12 text-white sm:mx-5 sm:py-14 lg:mx-auto lg:w-[min(1200px,calc(100%-3rem))] lg:py-16">
       <div aria-hidden="true" className="pointer-events-none absolute -right-64 -top-56 h-[500px] w-[500px] rounded-full border border-[#aec9b125] shadow-[0_0_0_68px_#aec9b108,0_0_0_138px_#aec9b106]" />
       <div className="shell relative z-10 grid items-center gap-9 md:grid-cols-[1.07fr_.93fr] md:gap-12 lg:gap-20">
         <Reveal className="mx-auto max-w-[490px] text-center md:mx-0 md:text-left">
