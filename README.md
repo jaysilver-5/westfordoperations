@@ -1,6 +1,6 @@
 # Westford Operations — Next.js + Tailwind
 
-A full six-page conversion of the supplied **Westford Operations Preview (2)(1).html** into a maintainable, responsive Next.js App Router application. The original editorial visual direction, approved copy, page structure, logo and hero image have been retained, with considered motion and mobile refinements.
+A responsive Next.js website for Westford Operations, an e-commerce operations service. The design uses restrained editorial typography, readable layouts, and clear paths for service enquiries or direct meeting bookings.
 
 ## Stack
 
@@ -38,7 +38,7 @@ For deployment: push to GitHub, import the repo into Vercel (framework: Next.js)
 | `/agencies` | Agency delivery, white-label positioning, workflow and FAQs |
 | `/brands` | Brand support, workflows and FAQs |
 | `/about` | Company positioning, principles, audiences |
-| `/contact` | Free trial and free review enquiries, email delivery, FAQs |
+| `/contact` | Concise free trial and review enquiry form, email delivery |
 | `/book` | Branded meeting-scheduling page with live availability from a connected scheduling provider |
 
 The header and footer navigate to **real Next.js routes**, not JavaScript-switched hidden pages. Service cards open an accessible native modal, with a link to a full service scope and a prefilled enquiry route. Contact CTAs pass intent, service and audience through URL parameters.
@@ -47,13 +47,13 @@ The header and footer navigate to **real Next.js routes**, not JavaScript-switch
 
 “Book a call”, “Talk to us”, and general-discussion CTAs now open `/book`, a dedicated Westford-branded scheduling page. Existing `/contact?intent=general` links redirect there and preserve service/audience context. Trial and free-review enquiries still use the contact form.
 
-Create a real introductory event with **Calendly** or **Cal.com**, connect your availability and meeting location in the scheduling provider, then set:
+To enable actual bookings, create an introductory event with **Calendly** or **Cal.com**. Connect the host's real calendar, set availability and time zone, choose the meeting location (a video-call link or phone call), and enable automatic calendar invitations and booking confirmations. Make sure the event allows instant booking without manual approval. Then configure:
 
 ```dotenv
-NEXT_PUBLIC_BOOKING_URL=https://calendly.com/your-team/intro-call
+BOOKING_URL=https://cal.com/your-team/intro
 ```
 
-You may use a Cal.com event URL instead. Only HTTPS scheduling URLs from those two providers are accepted, so an arbitrary untrusted URL cannot be embedded. The provider owns actual available times, time-zone conversion, meeting confirmations, and calendar invitations. No appointments or time slots are invented in Westford's UI. Without a configured URL, the booking page gracefully offers direct email to arrange a meeting. A configured, working booking URL is **required to enable live reservations**. This website does not automatically create a Calendly/Cal.com account or event.
+You may use a Calendly event URL instead. The legacy `NEXT_PUBLIC_BOOKING_URL` setting also works; `BOOKING_URL` is preferred because it is read on the server. Only HTTPS scheduling URLs from those two providers are accepted. The provider handles real-time availability, time-zone conversion, the confirmed booking, and sending the attendee a calendar invitation and meeting details. Visitors do **not** email Westford to request a call, and Westford never invents available time slots. When no valid event URL is configured, the page clearly states that online booking is not yet available. The site cannot create a scheduling provider account or calendar event on its own.
 
 ## Animation approach
 
@@ -89,7 +89,7 @@ The contact form sends to `POST /api/enquiry`. The server validates fields and i
 
 Set `RESEND_API_KEY` as a **server-only secret** in `.env.local` / the hosting project and verify your sending domain in Resend. Optional server-only `CONTACT_FROM_EMAIL` and `CONTACT_TO_EMAIL` override the sending and receiving addresses; both default to the public contact address. The receiving mailbox must already exist with your email host. Creating or displaying an address in the site does not create an inbox or change mail DNS records.
 
-Success appears only after the provider accepts the email and returns its message ID. Missing setup, provider failures and timeouts preserve the form and show a retry/direct-email alternative. The UI does not claim the email has arrived in an inbox or that a trial has been activated. Trial scope, workload and start date are agreed separately. Optional local draft storage and copy/download of submitted details remain available. The in-memory throttle is per server instance; configure hosting-level rate limits for distributed abuse protection.
+Success appears only after the provider accepts the email and returns its message ID. Missing setup, provider failures and timeouts preserve the form and show a retry/direct-email alternative. The UI does not claim the email has arrived in an inbox or that a trial has been activated. Trial scope, workload and start date are agreed separately. The contact form does not store personal details in browser storage. The in-memory throttle is per server instance; configure hosting-level rate limits for distributed abuse protection.
 
 ## Project organization
 
@@ -104,16 +104,18 @@ src/
     brands/page.tsx
     about/page.tsx
     contact/page.tsx
+    book/page.tsx
   components/
     animations.tsx       # Shared reduced-motion-aware reveals
     navigation.tsx       # Sticky responsive header and mobile nav
-    footer.tsx           # Shared footer and draft-storage dialog
+    footer.tsx           # Shared footer and navigation
     ui.tsx               # Buttons, headings, FAQs, CTAs, steps
     service-cards.tsx    # Service grid with scope dialogs
     audience-page.tsx    # Reusable agencies/brands page layout
-    contact-form.tsx     # Enquiry draft form and summary actions
+    contact-form.tsx     # Short, open-ended enquiry form
   data/content.json      # Original HTML copy, extracted faithfully
-  lib/links.ts           # Typed, prefilled contact URL helper
+  lib/links.ts           # Typed, prefilled contact and booking URL helper
+  lib/booking.ts         # Trusted scheduling-provider link validation
 public/
   favicon.png
   images/
