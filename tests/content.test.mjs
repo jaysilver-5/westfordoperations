@@ -54,3 +54,12 @@ test('contact experience stays open-ended and meeting booking never falls back t
   assert.doesNotMatch(booking, /mailto:|Email to arrange a call|contactEmailHref/);
   assert.doesNotMatch(footer, /Draft storage/);
 });
+
+test('Talk to us opens the direct meeting booking flow', () => {
+  const navigation = readFileSync(join(root, 'src/components/navigation.tsx'), 'utf8');
+  const booking = readFileSync(join(root, 'src/app/book/page.tsx'), 'utf8');
+  assert.match(navigation, /href="\\/book"/);
+  assert.match(navigation, /Talk to us/);
+  assert.match(booking, /src=\\{bookingUrl\\}/);
+  assert.doesNotMatch(booking, /href="mailto:|Email to arrange a call/);
+});
