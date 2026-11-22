@@ -45,6 +45,9 @@ The header and footer navigate to **real Next.js routes**, not JavaScript-switch
 
 ## Meeting bookings
 
+The **Talk to us** button in the header and mobile menu goes directly to the scheduling page. The booking widget collects the attendee's details, lets them choose a confirmed available time, and (once configured) sends the invitation using the scheduling provider. No Westford enquiry email is required or sent to schedule meetings.
+
+
 “Book a call”, “Talk to us”, and general-discussion CTAs now open `/book`, a dedicated Westford-branded scheduling page. Existing `/contact?intent=general` links redirect there and preserve service/audience context. Trial and free-review enquiries still use the contact form.
 
 To enable actual bookings, create an introductory event with **Calendly** or **Cal.com**. Connect the host's real calendar, set availability and time zone, choose the meeting location (a video-call link or phone call), and enable automatic calendar invitations and booking confirmations. Make sure the event allows instant booking without manual approval. Then configure:
@@ -83,7 +86,7 @@ Use `.env.local` for local development, or add this variable to your existing ho
 
 The shared configuration in `src/lib/site.ts` supplies the footer, direct contact links and form delivery address. The proposed default is `hello@westfordoperations.com`; set `NEXT_PUBLIC_CONTACT_EMAIL` to the actual existing mailbox before launch. An explicitly empty or invalid address hides email links.
 
-Visitors see a compact trial announcement across the site, trial CTAs, a homepage offer section and trial FAQs. Trial CTAs open `/contact?intent=trial#contact-form` and preserve any service and audience. Existing `review` and `general` links continue to work.
+Visitors can request a two-week trial or free operations review using the concise enquiry form. Trial CTAs open `/contact?intent=trial#contact-form` and preserve any service and audience. Existing `review` and `general` links continue to work.
 
 The contact form sends to `POST /api/enquiry`. The server validates fields and intent, rejects cross-origin and honeypot submissions, applies a bounded per-instance request throttle and sends a plain-text email through Resend. The recipient is configured on the server; a submitted email address is used only as `reply_to`. A request ID prevents duplicate provider sends when retrying the same request. No passwords or mail service keys enter the browser bundle.
 
