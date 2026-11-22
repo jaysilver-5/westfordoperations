@@ -7,7 +7,9 @@ export function normalizeBookingUrl(input: string | undefined): string | null {
   try {
     const url = new URL(input.trim());
     const hosts = new Set(['calendly.com', 'www.calendly.com', 'cal.com', 'app.cal.com']);
-    if (url.protocol !== 'https:' || !hosts.has(url.hostname.toLowerCase()) || url.username || url.password || url.hash || url.pathname === '/') return null;
+    if (url.protocol !== 'https:' || !hosts.has(url.hostname.toLowerCase()) || url.username || url.password || url.hash || url.port) return null;
+    // A concrete event type, not just the provider's home page or a host profile.
+    if (url.pathname.split('/').filter(Boolean).length < 2) return null;
     return url.toString();
   } catch {
     return null;
