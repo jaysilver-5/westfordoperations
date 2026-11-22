@@ -12,7 +12,7 @@ test('all six original pages are represented', () => {
 });
 
 test('dedicated App Router files exist for every destination', () => {
-  const routeDirs = ['services', 'agencies', 'brands', 'about', 'contact'];
+  const routeDirs = ['services', 'agencies', 'brands', 'about', 'contact', 'book'];
   assert.ok(existsSync(join(root, 'src/app/page.tsx')));
   for (const route of routeDirs) assert.ok(existsSync(join(root, 'src/app', route, 'page.tsx')));
 });
