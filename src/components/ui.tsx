@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
 import { Reveal } from './animations';
-import { enquiryHref, type EnquiryMode } from '@/lib/links';
+import { enquiryHref, parseEnquiryMode, type EnquiryMode } from '@/lib/links';
 import type { ReactNode } from 'react';
 
 export type Intro = { eyebrow: string; title: string; description: string };
@@ -22,13 +22,13 @@ export function PrimaryLink({ href, children, variant = 'primary', className = '
   return <Link href={href} className={`${variantClass} group ${className}`}>{children}<ArrowUpRight aria-hidden="true" className="h-[17px] w-[17px] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={1.8} /></Link>;
 }
 
-export function EnquiryLink({ mode = 'review', service, audience, children, className = '', variant = 'primary' }: { mode?: EnquiryMode; service?: string | null; audience?: string | null; children: ReactNode; className?: string; variant?: 'primary' | 'light' | 'outline' }) {
+export function EnquiryLink({ mode = 'trial', service, audience, children, className = '', variant = 'primary' }: { mode?: EnquiryMode; service?: string | null; audience?: string | null; children: ReactNode; className?: string; variant?: 'primary' | 'light' | 'outline' }) {
   return <PrimaryLink href={enquiryHref(mode, service, audience)} className={className} variant={variant}>{children}</PrimaryLink>;
 }
 
 export function ActionButton({ action, variant = 'primary', className = '' }: { action: Action | null | undefined; variant?: 'primary' | 'light' | 'outline'; className?: string }) {
   if (!action) return null;
-  const href = action.href ?? enquiryHref(action.mode === 'general' ? 'general' : 'review', action.service, action.audience);
+  const href = action.href ?? enquiryHref(parseEnquiryMode(action.mode ?? undefined), action.service, action.audience);
   return <PrimaryLink href={href} variant={variant} className={className}>{action.label}</PrimaryLink>;
 }
 

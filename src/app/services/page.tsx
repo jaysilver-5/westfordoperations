@@ -13,7 +13,7 @@ const d = data.services;
 
 export default function ServicesPage() {
   return <main id="main-content">
-    <PageHero data={d.hero}><EnquiryLink mode="general">Discuss your operations</EnquiryLink></PageHero>
+    <PageHero data={d.hero}><EnquiryLink mode="trial">Find your fit. Try 2 weeks free.</EnquiryLink></PageHero>
     <nav className="shell grid gap-x-7 rounded-xl border border-[#d7e2d0] bg-[#edf2e8] px-5 py-2 sm:grid-cols-2 sm:px-8 lg:grid-cols-3" aria-label="Service areas">
       {d.scopes.map((scope, i) => <Link key={scope.key} href={`#scope-${scope.key}`} className="group flex min-h-[68px] items-center gap-3 border-t border-[#d4dece] py-3.5 text-[.81rem] font-semibold first:border-t-0 hover:text-teal sm:[&:nth-child(2)]:border-t-0 lg:[&:nth-child(3)]:border-t-0">
         <span className="text-[.67rem] font-bold tabular-nums text-teal">{String(i + 1).padStart(2, '0')}</span>

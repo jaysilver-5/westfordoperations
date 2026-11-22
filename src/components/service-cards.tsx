@@ -50,7 +50,7 @@ export function ServiceCards({ cards, scopes }: { cards: Card[]; scopes: Scope[]
         <ul className="check-list mt-3 space-y-2">{active.tasks.map(task => <li key={task}>{task}</li>)}</ul>
         <p className="mt-6 rounded-lg bg-mist p-4 text-[.77rem] leading-[1.85] text-muted">{active.condition}</p>
         <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-5">
-          <Link onClick={() => setSelected(null)} className="btn-primary" href={enquiryHref('general', active.key)}>Discuss this service <ArrowUpRight aria-hidden="true" size={18} /></Link>
+          <Link onClick={() => setSelected(null)} className="btn-primary" href={enquiryHref('trial', active.key)}>Ask about a free trial <ArrowUpRight aria-hidden="true" size={18} /></Link>
           <Link onClick={() => setSelected(null)} className="text-cta justify-center" href={`/services#scope-${active.key}`}>Full service details <ArrowRight aria-hidden="true" size={17} /></Link>
         </div>
       </>}

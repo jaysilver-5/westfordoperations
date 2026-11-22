@@ -33,12 +33,12 @@ For deployment: push to GitHub, import the repo into Vercel (framework: Next.js)
 
 | Route | Content |
 | --- | --- |
-| `/` | Hero, everyday workflow pain points, six services, five-step process, agency offering, controls, free-review CTA |
+| `/` | Hero, everyday workflow pain points, six services, five-step process, agency offering, controls, two-week trial offer |
 | `/services` | Service directory, detailed scopes, included vs specialist work, FAQs |
 | `/agencies` | Agency delivery, white-label positioning, workflow and FAQs |
 | `/brands` | Brand support, workflows and FAQs |
 | `/about` | Company positioning, principles, audiences |
-| `/contact` | Free review / general support choices, enquiry draft form, FAQs |
+| `/contact` | Free trial / general support / free review choices, email enquiry preparation, FAQs |
 
 The header and footer navigate to **real Next.js routes**, not JavaScript-switched hidden pages. Service cards open an accessible native modal, with a link to a full service scope and a prefilled enquiry route. Contact CTAs pass intent, service and audience through URL parameters.
 
@@ -58,20 +58,25 @@ The header and footer navigate to **real Next.js routes**, not JavaScript-switch
 
 Designed mobile-first, including small screens (~320px), tablet, desktop and large monitors. Real routes, source content, form fields, accessible focus states, touch-friendly targets, heading hierarchy, `details`-based FAQs and native `<dialog>` overlays are included.
 
-## IMPORTANT: enquiries are drafts only
+## Business email and trial requests
 
-**The supplied HTML was explicitly an interactive preview**. Its form did not transmit enquiries. This conversion preserves that behaviour to avoid implying that leads are being received when no backend or destination was provided.
+Set your public business address once:
 
-The contact form:
+```dotenv
+NEXT_PUBLIC_CONTACT_EMAIL=your-address@your-domain.com
+```
 
-1. Allows a free review or a general support enquiry.
-2. Accepts context passed in the URL (`intent`, `service`, `audience`).
-3. Validates required fields with native browser validation.
-4. Optionally remembers an editable draft in the visitor's browser `localStorage`.
-5. Generates a copyable/downloadable text summary.
-6. Clearly states that nothing has been sent to Westford.
+Use `.env.local` for local development, or add this variable to your existing hosting project's environment settings. Restart the dev server or rebuild/redeploy after changing it: `NEXT_PUBLIC_` values are included at build time. This is a public contact address, never an email password or API key.
 
-**Before a public launch**, replace the draft-only submit flow with a secure server-side delivery integration (e.g. an authenticated CRM webhook or transactional-email provider). Add spam/rate-limit protection, a privacy policy, an actual recipient/destination, and show verified submission success/error states. Do **not** display “sent” unless the server confirms delivery.
+The shared configuration in `src/lib/site.ts` supplies the footer, direct contact links and form delivery address. The proposed default is `hello@westfordoperations.com`; set `NEXT_PUBLIC_CONTACT_EMAIL` to the actual existing mailbox before launch. An explicitly empty or invalid address hides email links.
+
+Visitors see a compact trial announcement across the site, trial CTAs, a homepage offer section and trial FAQs. Trial CTAs open `/contact?intent=trial#contact-form` and preserve any service and audience. Existing `review` and `general` links continue to work.
+
+The contact form sends to `POST /api/enquiry`. The server validates fields and intent, rejects cross-origin and honeypot submissions, applies a bounded per-instance request throttle and sends a plain-text email through Resend. The recipient is configured on the server; a submitted email address is used only as `reply_to`. A request ID prevents duplicate provider sends when retrying the same request. No passwords or mail service keys enter the browser bundle.
+
+Set `RESEND_API_KEY` as a **server-only secret** in `.env.local` / the hosting project and verify your sending domain in Resend. Optional server-only `CONTACT_FROM_EMAIL` and `CONTACT_TO_EMAIL` override the sending and receiving addresses; both default to the public contact address. The receiving mailbox must already exist with your email host. Creating or displaying an address in the site does not create an inbox or change mail DNS records.
+
+Success appears only after the provider accepts the email and returns its message ID. Missing setup, provider failures and timeouts preserve the form and show a retry/direct-email alternative. The UI does not claim the email has arrived in an inbox or that a trial has been activated. Trial scope, workload and start date are agreed separately. Optional local draft storage and copy/download of submitted details remain available. The in-memory throttle is per server instance; configure hosting-level rate limits for distributed abuse protection.
 
 ## Project organization
 
@@ -111,4 +116,4 @@ The logo and hero image were extracted from the user-supplied HTML. Instead of s
 
 ## Verification
 
-This project was authored in an environment with **no working access to the npm registry**. Dependency installation and a Next.js production build therefore could not be run here; run the three commands in Getting started on a machine with npm access. See any follow-up QA notes in the delivery message.
+Run `npm run typecheck`, `npm test` and `npm run build`. Tests cover content/routes, trial context, configurable recipients, email encoding, server validation, spam checks, throttling, reply-to handling, and failure responses. Transport is stubbed only in unit tests; live email delivery requires the real mail service configuration and a verified receiving inbox.

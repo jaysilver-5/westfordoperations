@@ -9,8 +9,8 @@ export function AudiencePage({ kind }: { kind: AudienceKind }) {
   return <main id="main-content">
     <PageHero data={d.hero}>
       {kind === 'agencies'
-        ? <EnquiryLink mode="general" audience="agency" className="w-full max-w-[345px] sm:w-auto">Discuss agency support</EnquiryLink>
-        : <EnquiryLink mode="review" audience="brand" className="w-full max-w-[345px] sm:w-auto">Get my free operations review</EnquiryLink>}
+        ? <EnquiryLink mode="trial" audience="agency" className="w-full max-w-[345px] sm:w-auto">Try us with your agency</EnquiryLink>
+        : <EnquiryLink mode="trial" audience="brand" className="w-full max-w-[345px] sm:w-auto">Give your team 2 weeks of support</EnquiryLink>}
       <ArrowLink href="/services">Explore our services</ArrowLink>
     </PageHero>
 

@@ -11,7 +11,7 @@ const d = data.about;
 
 export default function AboutPage() {
   return <main id="main-content">
-    <PageHero data={d.hero}><EnquiryLink mode="general">Discuss your operations</EnquiryLink><ArrowLink href="/services">Explore our services</ArrowLink></PageHero>
+    <PageHero data={d.hero}><EnquiryLink mode="trial">Get to know us. Try 2 weeks free.</EnquiryLink><ArrowLink href="/services">Explore our services</ArrowLink></PageHero>
     <section className="section-pad !pt-8 sm:!pt-12">
       <div className="shell grid items-start gap-8 md:grid-cols-[.87fr_1.13fr] md:gap-13 lg:gap-24">
         <Reveal className="mx-auto max-w-[470px] text-center md:mx-0 md:text-left"><SectionIntro data={d.statement.intro} /></Reveal>

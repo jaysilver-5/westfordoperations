@@ -5,10 +5,11 @@ import data from '@/data/content.json';
 import { Reveal } from '@/components/animations';
 import { ArrowLink, EnquiryLink, Eyebrow, NumberedList, SectionIntro } from '@/components/ui';
 import { ServiceCards } from '@/components/service-cards';
+import { TrialOffer } from '@/components/trial-offer';
 
 export const metadata: Metadata = {
   title: 'Westford Operations | Keep your stores moving',
-  description: 'Managed e-commerce operations for agencies and growing brands. Practical support with store updates, orders and customer service.',
+  description: 'Try Westford free for two weeks. Managed e-commerce operations for agencies and growing brands, from store updates to orders and customer support.',
 };
 
 const h = data.home;
@@ -29,11 +30,11 @@ export default function HomePage() {
           <p className="copy-muted mx-auto mt-4 max-w-[650px] !text-[.9rem] sm:!text-[.9375rem]">{h.hero.description}</p>
         </Reveal>
         <Reveal onLoad delay={0.31} className="mt-5 flex flex-col items-center justify-center gap-2 sm:flex-row sm:gap-6">
-          <EnquiryLink className="w-full max-w-[340px] sm:w-auto" mode="review">Get my free operations review</EnquiryLink>
+          <EnquiryLink className="w-full max-w-[340px] sm:w-auto" mode="trial">Try Westford free for 2 weeks</EnquiryLink>
           <ArrowLink className="justify-center" href="/services">Explore our services</ArrowLink>
         </Reveal>
         <Reveal onLoad delay={0.38}>
-          <p className="mt-3 text-[.73rem] leading-[1.9] text-[#61726f]">One workflow. Three practical next steps. <span className="mx-2 hidden text-[#9aab9a] sm:inline">•</span><span className="block sm:inline">No store login required.</span></p>
+          <p className="mt-3 text-[.73rem] leading-[1.9] text-[#61726f]">Real support. One agreed workflow. <a href="#free-trial" className="ml-1 font-semibold text-teal underline underline-offset-4 hover:text-ink">See how the free trial works</a></p>
         </Reveal>
         <Reveal onLoad delay={0.4} distance={13} className="relative mx-auto mt-6 h-[140px] overflow-hidden rounded-xl shadow-[0_20px_35px_-28px_#17343d88] sm:h-[clamp(150px,25svh,210px)]">
           <Image src="/images/westford-workspace.webp" fill priority sizes="(max-width: 640px) 94vw, (max-width: 1024px) 90vw, 1120px" alt="A quiet sunlit workspace with a notebook and laptop" className="object-cover object-[center_62%]" />
@@ -52,7 +53,7 @@ export default function HomePage() {
           <NumberedList items={h.everyday.items} />
           <Reveal className="border-t border-line pt-5 md:ml-[3.25rem]">
             <p className="text-[.79rem] leading-[1.85] text-muted">{h.everyday.close}</p>
-            <ArrowLink href="/contact?intent=review#contact-form" className="mt-2">Find your starting point</ArrowLink>
+            <ArrowLink href="/contact?intent=trial#contact-form" className="mt-2">Let’s find your starting point</ArrowLink>
           </Reveal>
         </div>
       </div>
@@ -91,7 +92,7 @@ export default function HomePage() {
       <div className="shell relative z-10 grid items-center gap-9 md:grid-cols-[1.07fr_.93fr] md:gap-12 lg:gap-20">
         <Reveal className="mx-auto max-w-[490px] text-center md:mx-0 md:text-left">
           <SectionIntro data={h.agency.intro} inverse />
-          <div className="mt-7"><EnquiryLink variant="light" audience="agency" mode="general">Discuss agency support</EnquiryLink></div>
+          <div className="mt-7"><EnquiryLink variant="light" audience="agency" mode="trial">Try us with your agency</EnquiryLink></div>
         </Reveal>
         <div className="md:border-l md:border-white/20 md:pl-9">
           {h.agency.items.map((x,i) => <Reveal key={x.title} delay={i * .08} className="border-t border-white/15 py-5 first:border-0 first:pt-0 last:pb-0">
@@ -113,15 +114,6 @@ export default function HomePage() {
       </div>
     </section>
 
-    <section id="free-review" aria-labelledby="review-heading" className="section-pad bg-palesage text-center">
-      <Reveal className="shell mx-auto max-w-[765px]">
-        <Eyebrow>{h.review.intro.eyebrow}</Eyebrow>
-        <h2 id="review-heading" className="heading-editorial mt-5">{h.review.intro.title}</h2>
-        <p className="copy-muted mx-auto mt-5 max-w-[600px]">{h.review.intro.description}</p>
-        <div className="mt-7"><EnquiryLink className="w-full max-w-[345px] sm:w-auto" mode="review">Get my free operations review</EnquiryLink></div>
-        <p className="mt-4 text-[.75rem] leading-[1.8] text-muted">One workflow. Three practical next steps. <span className="block sm:inline">No store login required.</span></p>
-        <div className="mx-auto mt-7 max-w-[500px] border-t border-[#cedac7] pt-5"><h3 className="text-[.75rem] font-extrabold">Helpful to bring</h3><p className="mt-2 text-[.74rem] leading-[1.9] text-muted">Your platform, the task that keeps getting stuck, and an approximate product, order or enquiry volume.</p></div>
-      </Reveal>
-    </section>
+    <TrialOffer />
   </main>;
 }

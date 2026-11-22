@@ -367,6 +367,14 @@
       },
       "items": [
         {
+          "q": "How does the two-week free trial work?",
+          "a": "Tell us about the workflow you need help with. We’ll confirm the tasks, workload, approvals and start date together. Your free trial then runs for two weeks on that agreed scope."
+        },
+        {
+          "q": "What happens after the free trial?",
+          "a": "We’ll review the work and the fit with you. If you’d like to continue, we’ll agree the scope and pricing for ongoing support separately."
+        },
+        {
           "q": "Can we start with one workflow?",
           "a": "Yes. Start with one store or a defined workflow, then agree the tasks, workload and approvals. Additional work is reviewed before the scope changes."
         },
@@ -390,14 +398,14 @@
     },
     "cta": {
       "intro": {
-        "eyebrow": "Find your starting point",
-        "title": "Start with a free operations review.",
-        "description": "One workflow. Three practical next steps. No store login required."
+        "eyebrow": "Two weeks, on us",
+        "title": "See what a little support can change.",
+        "description": "Start with one agreed workflow. Try Westford free for two weeks and see how we fit into your team."
       },
       "action": {
-        "label": "Get my free operations review",
+        "label": "Let’s start my free trial",
         "href": null,
-        "mode": "review",
+        "mode": "trial",
         "service": null,
         "audience": null
       }
@@ -502,6 +510,14 @@
       },
       "items": [
         {
+          "q": "How does the two-week free trial work?",
+          "a": "Tell us about the workflow you need help with. We’ll confirm the tasks, workload, approvals and start date together. Your free trial then runs for two weeks on that agreed scope."
+        },
+        {
+          "q": "What happens after the free trial?",
+          "a": "We’ll review the work and the fit with you. If you’d like to continue, we’ll agree the scope and pricing for ongoing support separately."
+        },
+        {
           "q": "Can we start with one client store?",
           "a": "Yes. Begin with a defined workflow for one store. Additional stores and workloads are assessed before expanding the engagement."
         },
@@ -517,14 +533,14 @@
     },
     "cta": {
       "intro": {
-        "eyebrow": "Find your starting point",
-        "title": "Bring us the workflow that keeps getting stuck.",
-        "description": "Start with a free review of one workflow. Take away three practical next steps in a one-page plan. No store login required."
+        "eyebrow": "Two weeks, on us",
+        "title": "See what a little support can change.",
+        "description": "Start with one agreed workflow. Try Westford free for two weeks and see how we fit into your team."
       },
       "action": {
-        "label": "Get my free operations review",
+        "label": "Let’s start my free trial",
         "href": null,
-        "mode": "review",
+        "mode": "trial",
         "service": null,
         "audience": "agency"
       }
@@ -629,6 +645,14 @@
       },
       "items": [
         {
+          "q": "How does the two-week free trial work?",
+          "a": "Tell us about the workflow you need help with. We’ll confirm the tasks, workload, approvals and start date together. Your free trial then runs for two weeks on that agreed scope."
+        },
+        {
+          "q": "What happens after the free trial?",
+          "a": "We’ll review the work and the fit with you. If you’d like to continue, we’ll agree the scope and pricing for ongoing support separately."
+        },
+        {
           "q": "Can you work alongside our existing team?",
           "a": "Yes. We define the tasks Westford owns, the decisions your team retains and how work moves between us. Your existing tools and processes are reviewed during scoping."
         },
@@ -644,14 +668,14 @@
     },
     "cta": {
       "intro": {
-        "eyebrow": "Let’s talk operations",
-        "title": "What does your team need covered?",
-        "description": "Tell us about your store and the work taking up your day. We can define a practical starting scope together."
+        "eyebrow": "Two weeks, on us",
+        "title": "See what a little support can change.",
+        "description": "Start with one agreed workflow. Try Westford free for two weeks and see how we fit into your team."
       },
       "action": {
-        "label": "Discuss support for my brand",
+        "label": "Let’s start my free trial",
         "href": null,
-        "mode": "general",
+        "mode": "trial",
         "service": null,
         "audience": "brand"
       }
@@ -732,14 +756,14 @@
     },
     "cta": {
       "intro": {
-        "eyebrow": "A practical first step",
-        "title": "Find a clearer way forward.",
-        "description": "Start with a free review of one workflow. Take away three practical next steps in a concise one-page plan. No store login required."
+        "eyebrow": "Two weeks, on us",
+        "title": "See what a little support can change.",
+        "description": "Start with one agreed workflow. Try Westford free for two weeks and see how we fit into your team."
       },
       "action": {
-        "label": "Get my free operations review",
+        "label": "Let’s start my free trial",
         "href": null,
-        "mode": "review",
+        "mode": "trial",
         "service": null,
         "audience": null
       }
@@ -795,6 +819,28 @@
           }
         ],
         "assurance": "Enquiring on behalf of clients? Select Agency in the form so we can discuss the right handoff and communication process."
+      },
+      "trial": {
+        "intro": {
+          "eyebrow": "Make room for what’s next",
+          "title": "Real support. A chance to see the fit.",
+          "description": "Try Westford free for two weeks, starting with a focused piece of your store operations."
+        },
+        "items": [
+          {
+            "title": "Tell us where you need a hand",
+            "description": "Share one recurring task or workflow that is taking too much of your team’s time."
+          },
+          {
+            "title": "Agree your trial together",
+            "description": "We’ll confirm the work, volume, approvals and start date before the two weeks begin."
+          },
+          {
+            "title": "See how we work",
+            "description": "Get support on the agreed workflow, then review the experience and discuss what comes next."
+          }
+        ],
+        "assurance": "The trial covers an agreed workflow and workload. Any ongoing support is discussed and agreed separately."
       }
     },
     "faq": {
@@ -804,6 +850,14 @@
         "description": ""
       },
       "items": [
+        {
+          "q": "How does the two-week free trial work?",
+          "a": "Tell us about the workflow you need help with. We’ll confirm the tasks, workload, approvals and start date together. Your free trial then runs for two weeks on that agreed scope."
+        },
+        {
+          "q": "What happens after the free trial?",
+          "a": "We’ll review the work and the fit with you. If you’d like to continue, we’ll agree the scope and pricing for ongoing support separately."
+        },
         {
           "q": "Do you need access to my store?",
           "a": "No access is needed for the initial free review. If we later agree delivery work, permissions and access are established as part of onboarding."
@@ -817,6 +871,11 @@
           "a": "The number of stores, the type of recurring work and how your team currently hands it over are useful starting points. You can describe the situation without sharing client names or records."
         }
       ]
+    },
+    "trialHero": {
+      "eyebrow": "Your first two weeks are on us",
+      "title": "A little less on your plate.",
+      "description": "Tell us what keeps your team busy. We’ll find a workflow we can take care of and agree your two-week free trial together."
     }
   }
 }
