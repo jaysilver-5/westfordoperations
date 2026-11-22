@@ -18,6 +18,10 @@ test('trial CTAs preserve service and audience and old review links still work',
   assert.equal(trial.searchParams.get('service'), 'orders');
   assert.equal(trial.searchParams.get('audience'), 'agency');
   assert.equal(trial.hash, '#contact-form');
+  const booking = new URL(enquiryHref('general', 'orders', 'agency'), 'https://example.test');
+  assert.equal(booking.pathname, '/book');
+  assert.equal(booking.searchParams.get('service'), 'orders');
+  assert.equal(booking.searchParams.get('audience'), 'agency');
   assert.equal(parseEnquiryMode('review'), 'review');
   assert.equal(parseEnquiryMode('general'), 'general');
   assert.equal(parseEnquiryMode(), 'trial');
