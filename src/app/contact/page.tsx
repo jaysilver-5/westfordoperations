@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 import data from '@/data/content.json';
 import { ContactForm } from '@/components/contact-form';
 import { FaqSection, PageHero } from '@/components/ui';
@@ -15,6 +16,15 @@ const first = (value: string | string[] | undefined) => Array.isArray(value) ? v
 export default async function ContactPage({ searchParams }: { searchParams: Promise<Query> }) {
   const params = await searchParams;
   const intent = parseEnquiryMode(first(params.intent));
+  // Legacy general-enquiry CTAs now open live meeting scheduling.
+  if (intent === 'general') {
+    const bookingParams = new URLSearchParams();
+    const service = first(params.service);
+    const audience = first(params.audience);
+    if (service) bookingParams.set('service', service);
+    if (audience) bookingParams.set('audience', audience);
+    redirect('/book' + (bookingParams.size ? '?' + bookingParams.toString() : ''));
+  }
   return <main id="main-content">
     <PageHero data={intent === 'trial' ? data.contact.trialHero : data.contact.hero} />
     <section className="pb-17 sm:pb-22 lg:pb-27" aria-label="Your operations enquiry">
