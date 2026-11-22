@@ -13,7 +13,7 @@ type Props = {
 };
 
 const emptyFields: EnquiryFields = {
-  name: '', email: '', company: '', audience: '', service: 'unsure',
+  name: '', email: '', company: '', audience: 'unspecified', service: 'unsure',
   challenge: '', website: '', platform: '', workload: '', remember: false,
 };
 
@@ -24,7 +24,7 @@ export function ContactForm({ initialIntent, initialService, initialAudience }: 
     ...emptyFields,
     // The incoming service is useful context, not a limit on what visitors can request.
     service: SERVICE_OPTIONS.some(([key]) => key === initialService) ? initialService! : 'unsure',
-    audience: ['agency', 'brand', 'other'].includes(initialAudience ?? '') ? initialAudience! : '',
+    audience: ['agency', 'brand', 'other'].includes(initialAudience ?? '') ? initialAudience! : 'unspecified',
   });
   const [sending, setSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -109,8 +109,8 @@ export function ContactForm({ initialIntent, initialService, initialAudience }: 
       </div> : <>
         <div className="border-b border-line pb-6">
           <p className="text-[.7rem] font-bold uppercase tracking-[.12em] text-teal">{isTrial ? 'Free trial enquiry' : 'Operations review enquiry'}</p>
-          <h2 className="mt-3 font-editorial text-[2.2rem] leading-[1.16] tracking-[-.025em]">A little about your business.</h2>
-          <p className="mt-2 max-w-[450px] text-[.85rem] leading-[1.8] text-muted">Tell us what you need. You don’t have to choose a service or know exactly where to start.</p>
+          <h2 className="mt-3 font-editorial text-[2.2rem] leading-[1.16] tracking-[-.025em]">Your enquiry.</h2>
+          <p className="mt-2 max-w-[450px] text-[.85rem] leading-[1.8] text-muted">Describe the work you need help with and leave your details below.</p>
         </div>
         <form className="mt-7" onSubmit={handleSubmit} aria-busy={sending}>
           <div className="hidden" aria-hidden="true">
@@ -136,19 +136,11 @@ export function ContactForm({ initialIntent, initialService, initialAudience }: 
                 <label className="field-label" htmlFor="enquiry-company">Company <span aria-hidden="true">*</span></label>
                 <input className="input-field" id="enquiry-company" name="company" autoComplete="organization" required maxLength={200} value={fields.company} onChange={change('company')} placeholder="Business name" />
               </div>
+
               <div>
-                <label className="field-label" htmlFor="enquiry-audience">Business type <span aria-hidden="true">*</span></label>
-                <select className="input-field" id="enquiry-audience" name="audience" required value={fields.audience} onChange={change('audience')}>
-                  <option value="">Select one</option>
-                  <option value="agency">E-commerce agency</option>
-                  <option value="brand">E-commerce brand</option>
-                  <option value="other">Other business</option>
-                </select>
+                <label className="field-label" htmlFor="enquiry-website">Website <span className="font-normal text-muted">(optional)</span></label>
+                <input className="input-field" id="enquiry-website" name="website" type="text" inputMode="url" autoComplete="url" maxLength={300} value={fields.website} onChange={change('website')} placeholder="yourbusiness.com" />
               </div>
-            </div>
-            <div className="mt-5">
-              <label className="field-label" htmlFor="enquiry-website">Website <span className="font-normal text-muted">(optional)</span></label>
-              <input className="input-field" id="enquiry-website" name="website" type="text" inputMode="url" autoComplete="url" maxLength={300} value={fields.website} onChange={change('website')} placeholder="yourbusiness.com" />
             </div>
             {error && <div ref={feedbackRef} tabIndex={-1} role="alert" className="mt-6 rounded-lg border border-[#e2c9bd] bg-[#fff7f3] p-4 text-[.84rem] leading-[1.75] text-[#8a4537] outline-none">{error}</div>}
             <button type="submit" disabled={sending} className="btn-primary mt-7 !min-h-13 w-full !rounded-lg !text-[.92rem] disabled:cursor-wait disabled:opacity-60">
