@@ -23,6 +23,7 @@ const request = (body = valid(), origin = 'https://westford.example') => new Req
 
 test('server validation accepts the full trial enquiry and rejects malformed or spam inputs', () => {
   assert.equal(enquiry.parseEnquiry(valid()).intent, 'trial');
+  assert.equal(enquiry.parseEnquiry({ ...valid(), audience: 'unspecified' }).audience, 'unspecified');
   for (const changes of [{ email: 'invalid' }, { email: 'alex@example.test\nBcc:other@example.test' }, { company: '' }, { challenge: 'x'.repeat(2001) }, { intent: 'unknown' }, { audience: 'invalid' }, { service: 'invalid' }, { requestId: 'bad-id' }, { websiteConfirm: 'spam' }]) {
     assert.equal(enquiry.parseEnquiry({ ...valid(), ...changes }), null);
   }
