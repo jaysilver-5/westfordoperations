@@ -65,7 +65,7 @@ export default function HomePage() {
         <ServiceCards cards={h.services.items} scopes={data.services.scopes} />
         <Reveal className="mt-6 flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
           <p className="max-w-[660px] text-[.73rem] leading-[1.9] text-muted">{h.services.note}</p>
-          <ArrowLink href="/contact?intent=general#contact-form" className="shrink-0">Discuss your operations</ArrowLink>
+          <ArrowLink href="/book" className="shrink-0">Discuss your operations</ArrowLink>
         </Reveal>
       </div>
     </section>
@@ -83,7 +83,7 @@ export default function HomePage() {
             </div>
           </Reveal>)}
         </ol>
-        <Reveal className="mt-4 text-center lg:mt-9"><ArrowLink href="/contact?intent=general#contact-form">Discuss your operations</ArrowLink></Reveal>
+        <Reveal className="mt-4 text-center lg:mt-9"><ArrowLink href="/book">Discuss your operations</ArrowLink></Reveal>
       </div>
     </section>
 

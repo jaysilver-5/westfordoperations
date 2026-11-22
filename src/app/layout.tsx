@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 import { Header } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { AnimationSettings } from '@/components/animations';
-import { TrialBanner } from '@/components/trial-offer';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -33,7 +32,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <body>
       <a href="#main-content" className="sr-only fixed left-3 top-3 z-[100] rounded-lg bg-ink px-5 py-3 text-white focus:not-sr-only">Skip to content</a>
       <AnimationSettings>
-        <TrialBanner />
         <Header />
         {children}
         <Footer />

@@ -1,6 +1,6 @@
 # Westford Operations — Next.js + Tailwind
 
-A full six-page conversion of the supplied **Westford Operations Preview (2)(1).html** into a maintainable, responsive Next.js App Router application. The original editorial visual direction, approved copy, page structure, logo and hero image have been retained, with considered motion and mobile refinements.
+A responsive Next.js website for Westford Operations, an e-commerce operations service. The design uses restrained editorial typography, readable layouts, and clear paths for service enquiries or direct meeting bookings.
 
 ## Stack
 
@@ -38,9 +38,25 @@ For deployment: push to GitHub, import the repo into Vercel (framework: Next.js)
 | `/agencies` | Agency delivery, white-label positioning, workflow and FAQs |
 | `/brands` | Brand support, workflows and FAQs |
 | `/about` | Company positioning, principles, audiences |
-| `/contact` | Free trial / general support / free review choices, email enquiry preparation, FAQs |
+| `/contact` | Concise free trial and review enquiry form, email delivery |
+| `/book` | Branded meeting-scheduling page with live availability from a connected scheduling provider |
 
 The header and footer navigate to **real Next.js routes**, not JavaScript-switched hidden pages. Service cards open an accessible native modal, with a link to a full service scope and a prefilled enquiry route. Contact CTAs pass intent, service and audience through URL parameters.
+
+## Meeting bookings
+
+The **Talk to us** button in the header and mobile menu goes directly to the scheduling page. The booking widget collects the attendee's details, lets them choose a confirmed available time, and (once configured) sends the invitation using the scheduling provider. No Westford enquiry email is required or sent to schedule meetings.
+
+
+“Book a call”, “Talk to us”, and general-discussion CTAs now open `/book`, a dedicated Westford-branded scheduling page. Existing `/contact?intent=general` links redirect there and preserve service/audience context. Trial and free-review enquiries still use the contact form.
+
+To enable actual bookings, create an introductory event with **Calendly** or **Cal.com**. Connect the host's real calendar, set availability and time zone, choose the meeting location (a video-call link or phone call), and enable automatic calendar invitations and booking confirmations. Make sure the event allows instant booking without manual approval. Then configure:
+
+```dotenv
+BOOKING_URL=https://cal.com/your-team/intro
+```
+
+You may use a Calendly event URL instead. The legacy `NEXT_PUBLIC_BOOKING_URL` setting also works; `BOOKING_URL` is preferred because it is read on the server. Only HTTPS scheduling URLs from those two providers are accepted. The provider handles real-time availability, time-zone conversion, the confirmed booking, and sending the attendee a calendar invitation and meeting details. Visitors do **not** email Westford to request a call, and Westford never invents available time slots. When no valid event URL is configured, the page clearly states that online booking is not yet available. The site cannot create a scheduling provider account or calendar event on its own.
 
 ## Animation approach
 
@@ -70,13 +86,13 @@ Use `.env.local` for local development, or add this variable to your existing ho
 
 The shared configuration in `src/lib/site.ts` supplies the footer, direct contact links and form delivery address. The proposed default is `hello@westfordoperations.com`; set `NEXT_PUBLIC_CONTACT_EMAIL` to the actual existing mailbox before launch. An explicitly empty or invalid address hides email links.
 
-Visitors see a compact trial announcement across the site, trial CTAs, a homepage offer section and trial FAQs. Trial CTAs open `/contact?intent=trial#contact-form` and preserve any service and audience. Existing `review` and `general` links continue to work.
+Visitors can request a two-week trial or free operations review using the concise enquiry form. Trial CTAs open `/contact?intent=trial#contact-form` and preserve any service and audience. Existing `review` and `general` links continue to work.
 
 The contact form sends to `POST /api/enquiry`. The server validates fields and intent, rejects cross-origin and honeypot submissions, applies a bounded per-instance request throttle and sends a plain-text email through Resend. The recipient is configured on the server; a submitted email address is used only as `reply_to`. A request ID prevents duplicate provider sends when retrying the same request. No passwords or mail service keys enter the browser bundle.
 
 Set `RESEND_API_KEY` as a **server-only secret** in `.env.local` / the hosting project and verify your sending domain in Resend. Optional server-only `CONTACT_FROM_EMAIL` and `CONTACT_TO_EMAIL` override the sending and receiving addresses; both default to the public contact address. The receiving mailbox must already exist with your email host. Creating or displaying an address in the site does not create an inbox or change mail DNS records.
 
-Success appears only after the provider accepts the email and returns its message ID. Missing setup, provider failures and timeouts preserve the form and show a retry/direct-email alternative. The UI does not claim the email has arrived in an inbox or that a trial has been activated. Trial scope, workload and start date are agreed separately. Optional local draft storage and copy/download of submitted details remain available. The in-memory throttle is per server instance; configure hosting-level rate limits for distributed abuse protection.
+Success appears only after the provider accepts the email and returns its message ID. Missing setup, provider failures and timeouts preserve the form and show a retry/direct-email alternative. The UI does not claim the email has arrived in an inbox or that a trial has been activated. Trial scope, workload and start date are agreed separately. The contact form does not store personal details in browser storage. The in-memory throttle is per server instance; configure hosting-level rate limits for distributed abuse protection.
 
 ## Project organization
 
@@ -91,16 +107,18 @@ src/
     brands/page.tsx
     about/page.tsx
     contact/page.tsx
+    book/page.tsx
   components/
     animations.tsx       # Shared reduced-motion-aware reveals
     navigation.tsx       # Sticky responsive header and mobile nav
-    footer.tsx           # Shared footer and draft-storage dialog
+    footer.tsx           # Shared footer and navigation
     ui.tsx               # Buttons, headings, FAQs, CTAs, steps
     service-cards.tsx    # Service grid with scope dialogs
     audience-page.tsx    # Reusable agencies/brands page layout
-    contact-form.tsx     # Enquiry draft form and summary actions
+    contact-form.tsx     # Short, open-ended enquiry form
   data/content.json      # Original HTML copy, extracted faithfully
-  lib/links.ts           # Typed, prefilled contact URL helper
+  lib/links.ts           # Typed, prefilled contact and booking URL helper
+  lib/booking.ts         # Trusted scheduling-provider link validation
 public/
   favicon.png
   images/

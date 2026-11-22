@@ -34,7 +34,7 @@ export default function ServicesPage() {
             <Reveal delay={.1}>
               <ul className="check-list space-y-2">{s.tasks.map(task => <li key={task}>{task}</li>)}</ul>
               <p className="mt-5 text-[.76rem] leading-[1.9] text-muted">{s.condition}</p>
-              <ArrowLink href={`/contact?intent=general&service=${encodeURIComponent(s.key)}#contact-form`} className="mt-3">{s.action?.label ?? 'Discuss this service'}</ArrowLink>
+              <ArrowLink href={`/book?service=${encodeURIComponent(s.key)}`} className="mt-3">{s.action?.label ?? 'Discuss this service'}</ArrowLink>
             </Reveal>
           </div>
         </article>)}

@@ -1,16 +1,5 @@
-import Link from 'next/link';
-import { ArrowRight, Check, Sparkles } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { EnquiryLink, Eyebrow } from './ui';
-import { enquiryHref } from '@/lib/links';
-
-export function TrialBanner() {
-  return <aside aria-label="Two-week free trial offer" className="bg-forest text-ivory">
-    <div className="shell flex min-h-11 flex-wrap items-center justify-center gap-x-4 gap-y-1 py-2 text-center text-[.73rem] leading-5">
-      <span className="inline-flex items-center gap-2"><Sparkles size={14} className="text-[#d4dfb8]" aria-hidden="true" /><strong className="font-semibold">A little breathing room for your team.</strong><span className="hidden text-white/75 sm:inline">Try Westford free for 2 weeks.</span></span>
-      <Link href={enquiryHref('trial')} className="inline-flex min-h-7 items-center gap-2 font-bold text-[#e0e9c6] underline decoration-white/30 underline-offset-4 transition-colors hover:text-white focus-visible:!outline-white">Get my 2 weeks free<ArrowRight size={14} aria-hidden="true" /></Link>
-    </div>
-  </aside>;
-}
 
 export function TrialOffer() {
   return <section id="free-trial" aria-labelledby="trial-heading" className="section-pad bg-palesage">

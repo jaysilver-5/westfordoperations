@@ -12,7 +12,7 @@ test('all six original pages are represented', () => {
 });
 
 test('dedicated App Router files exist for every destination', () => {
-  const routeDirs = ['services', 'agencies', 'brands', 'about', 'contact'];
+  const routeDirs = ['services', 'agencies', 'brands', 'about', 'contact', 'book'];
   assert.ok(existsSync(join(root, 'src/app/page.tsx')));
   for (const route of routeDirs) assert.ok(existsSync(join(root, 'src/app', route, 'page.tsx')));
 });
@@ -41,4 +41,25 @@ test('source logo and hero photograph are bundled', () => {
   for (const asset of ['westford-logo.webp', 'westford-workspace.webp']) {
     assert.ok(existsSync(join(root, 'public/images', asset)), `missing asset ${asset}`);
   }
+});
+
+test('contact experience stays open-ended and meeting booking never falls back to email', () => {
+  const form = readFileSync(join(root, 'src/components/contact-form.tsx'), 'utf8');
+  const booking = readFileSync(join(root, 'src/app/book/page.tsx'), 'utf8');
+  const footer = readFileSync(join(root, 'src/components/footer.tsx'), 'utf8');
+  assert.match(form, /name="challenge"/);
+  assert.doesNotMatch(form, /SERVICE_OPTIONS\.map/);
+  assert.doesNotMatch(form, /localStorage/);
+  assert.match(booking, /src=\{bookingUrl\}/);
+  assert.doesNotMatch(booking, /mailto:|Email to arrange a call|contactEmailHref/);
+  assert.doesNotMatch(footer, /Draft storage/);
+});
+
+test('Talk to us opens the direct meeting booking flow', () => {
+  const navigation = readFileSync(join(root, 'src/components/navigation.tsx'), 'utf8');
+  const booking = readFileSync(join(root, 'src/app/book/page.tsx'), 'utf8');
+  assert.ok(navigation.includes('href="/book"'));
+  assert.match(navigation, /Talk to us/);
+  assert.ok(booking.includes('src={bookingUrl}'));
+  assert.doesNotMatch(booking, /mailto:|Email to arrange a call/);
 });
