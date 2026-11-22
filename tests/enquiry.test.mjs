@@ -29,6 +29,12 @@ test('server validation accepts the full trial enquiry and rejects malformed or 
   }
 });
 
+test('open-ended enquiries do not silently invent a business category or single-service selection', () => {
+  const summary = enquiry.enquiryText({ ...valid(), audience: 'unspecified', service: 'unsure' }, 'Two-week free trial');
+  assert.doesNotMatch(summary, /Business:|Area of support:/);
+  assert.match(summary, /Order follow-ups/);
+});
+
 test('throttle limits repeated requests per client and expires after ten minutes', () => {
   const allow = enquiry.createEnquiryThrottle();
   for (let i = 0; i < 5; i++) assert.equal(allow('client-a', 100), true);
