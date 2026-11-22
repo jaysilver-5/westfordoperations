@@ -41,7 +41,8 @@ export function enquiryText(fields: EnquiryFields, label: string): string {
   return [
     'WESTFORD OPERATIONS — ENQUIRY', '', `Type: ${label}`,
     `Name: ${fields.name.trim()}`, `Work email: ${fields.email.trim()}`, `Company: ${fields.company.trim()}`,
-    ...(fields.audience === 'unspecified' ? [] : [`Business: ${audiences[fields.audience] ?? 'Not specified'}`]), `Area of support: ${service}`,
+    ...(fields.audience === 'unspecified' ? [] : [`Business: ${audiences[fields.audience] ?? 'Not specified'}`]),
+    ...(fields.service === 'unsure' ? [] : [`Area of support: ${service}`]),
     '', 'Current challenge:', fields.challenge.trim(),
     ...(fields.website ? ['', `Website: ${fields.website.trim()}`] : []),
     ...(fields.platform ? [`Platform: ${fields.platform.trim()}`] : []),
