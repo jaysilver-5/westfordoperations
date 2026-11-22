@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState, type ChangeEvent, type FormEvent } from 'react';
-import { ArrowUpRight, Boxes, CalendarDays, Check, ChevronDown, CircleHelp, Clipboard, ClipboardList, Download, Globe2, Headset, Mail, Megaphone, Pencil, RotateCcw, Wrench } from 'lucide-react';
+import { ArrowUpRight, Boxes, Check, ChevronDown, CircleHelp, Clipboard, ClipboardList, Download, Globe2, Headset, Mail, Megaphone, Pencil, RotateCcw, Wrench } from 'lucide-react';
 import { Reveal } from '@/components/animations';
 import { ArrowLink, Eyebrow } from '@/components/ui';
 import data from '@/data/content.json';
