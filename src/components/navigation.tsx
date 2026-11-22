@@ -50,7 +50,7 @@ export function Header() {
         })}
       </nav>
       <Link href="/book" className="group hidden shrink-0 items-center gap-3 rounded-lg border border-ink bg-ink px-4 py-3 text-[.72rem] font-bold text-white transition-colors hover:bg-forest lg:inline-flex">
-        Book a call<ArrowUpRight size={17} strokeWidth={1.8} aria-hidden="true" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        Talk to us<ArrowUpRight size={17} strokeWidth={1.8} aria-hidden="true" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </Link>
       <button type="button" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="mobile-navigation" className="relative z-20 inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[#d2ddcd] text-ink transition-colors hover:bg-[#e9eee7] lg:hidden" onClick={() => setOpen(v => !v)}>
         {open ? <X size={23} strokeWidth={1.8} /> : <Menu size={23} strokeWidth={1.8} />}
@@ -61,7 +61,7 @@ export function Header() {
         <nav aria-label="Mobile navigation" className="flex flex-col">
           {navItems.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)} aria-current={pathname === item.href ? 'page' : undefined} className={`rounded-lg px-4 py-3.5 text-sm font-semibold hover:bg-mist ${pathname === item.href ? 'text-teal' : 'text-ink'}`}>{item.text}</Link>)}
           <Link href="/book" onClick={() => setOpen(false)} className="mt-2 flex min-h-12 items-center justify-between gap-3 rounded-lg bg-ink px-4 py-3 text-sm font-semibold text-white">
-            Book a call<ArrowUpRight size={18} aria-hidden="true" />
+            Talk to us<ArrowUpRight size={18} aria-hidden="true" />
           </Link>
         </nav>
       </motion.div>}
