@@ -21,7 +21,7 @@ export default async function BookPage({ searchParams }: { searchParams: Promise
   const audience = first(params.audience);
   const audienceLabel = audience === 'agency' ? 'E-commerce agency' : audience === 'brand' ? 'E-commerce brand' : undefined;
   const bookingUrl = normalizeBookingUrl(process.env.NEXT_PUBLIC_BOOKING_URL);
-  const emailHref = contactEmailHref(contactEmail, 'general');
+  const emailHref = contactEmailHref(contactEmail, 'general', 'Hello Westford,\n\nI would like to book an introductory call.\n\nPreferred days/times and my time zone:\nWhat I would like to discuss:\n\nThanks!');
 
   return <main id="main-content" className="relative overflow-hidden">
     <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-0 -z-0 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-[#e6eee5] opacity-75 blur-[110px]" />
@@ -50,7 +50,7 @@ export default async function BookPage({ searchParams }: { searchParams: Promise
 
             <div className="mt-8 space-y-6 border-t border-white/20 pt-7">
               {[
-                { icon: Clock3, title: 'Find a convenient time', copy: 'Select an available slot in your own time zone.' },
+                { icon: Clock3, title: 'Find a convenient time', copy: bookingUrl ? 'Select an available slot in your own time zone.' : 'Email us a convenient time and your time zone.' },
                 { icon: ShieldCheck, title: 'Tell us what matters', copy: 'You won’t need to share credentials or private customer data.' },
                 { icon: Check, title: 'Leave with a clear next step', copy: 'We’ll discuss what makes sense before agreeing any work.' },
               ].map(({ icon: Icon, title, copy }) => <div key={title} className="flex gap-3.5">
@@ -72,7 +72,7 @@ export default async function BookPage({ searchParams }: { searchParams: Promise
           <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[#e5eae2] px-5 py-6 sm:px-8 sm:py-7">
             <div className="flex items-start gap-3">
               <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-[#edf2e9] text-teal"><CalendarDays size={21} strokeWidth={1.8} aria-hidden="true" /></div>
-              <div><h2 id="booking-heading" className="text-[1.1rem] font-bold tracking-[-.03em] sm:text-[1.2rem]">Choose a time to talk</h2><p className="mt-1 text-[.79rem] leading-[1.7] text-muted">See live availability and reserve a meeting.</p></div>
+              <div><h2 id="booking-heading" className="text-[1.1rem] font-bold tracking-[-.03em] sm:text-[1.2rem]">Choose a time to talk</h2><p className="mt-1 text-[.79rem] leading-[1.7] text-muted">{bookingUrl ? 'See live availability and reserve a meeting.' : 'Arrange a convenient time with our team.'}</p></div>
             </div>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-[#d7e4d6] bg-[#eff5eb] px-3 py-1.5 text-[.7rem] font-semibold text-teal"><Sparkles size={13} aria-hidden="true" /> Introductory call</span>
           </div>
