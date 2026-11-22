@@ -27,7 +27,7 @@ export function parseEnquiry(value: unknown): EnquirySubmission | null {
   }
   if (!fields.name || !fields.company || !fields.challenge) return null;
   if (!/^[^\s@<>,;:"\r\n]+@[^\s@<>,;:"\r\n]+\.[^\s@<>,;:"\r\n]+$/.test(fields.email)) return null;
-  if (!['agency', 'brand', 'other'].includes(fields.audience)) return null;
+  if (!['agency', 'brand', 'other', 'unspecified'].includes(fields.audience)) return null;
   if (!SERVICE_OPTIONS.some(([key]) => key === fields.service)) return null;
   if (!['trial', 'review', 'general'].includes(fields.intent)) return null;
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(fields.requestId)) return null;
@@ -41,7 +41,7 @@ export function enquiryText(fields: EnquiryFields, label: string): string {
   return [
     'WESTFORD OPERATIONS — ENQUIRY', '', `Type: ${label}`,
     `Name: ${fields.name.trim()}`, `Work email: ${fields.email.trim()}`, `Company: ${fields.company.trim()}`,
-    `Business: ${audiences[fields.audience] ?? 'Not specified'}`, `Area of support: ${service}`,
+    ...(fields.audience === 'unspecified' ? [] : [`Business: ${audiences[fields.audience] ?? 'Not specified'}`]), `Area of support: ${service}`,
     '', 'Current challenge:', fields.challenge.trim(),
     ...(fields.website ? ['', `Website: ${fields.website.trim()}`] : []),
     ...(fields.platform ? [`Platform: ${fields.platform.trim()}`] : []),
