@@ -38,9 +38,22 @@ For deployment: push to GitHub, import the repo into Vercel (framework: Next.js)
 | `/agencies` | Agency delivery, white-label positioning, workflow and FAQs |
 | `/brands` | Brand support, workflows and FAQs |
 | `/about` | Company positioning, principles, audiences |
-| `/contact` | Free trial / general support / free review choices, email enquiry preparation, FAQs |
+| `/contact` | Free trial and free review enquiries, email delivery, FAQs |
+| `/book` | Branded meeting-scheduling page with live availability from a connected scheduling provider |
 
 The header and footer navigate to **real Next.js routes**, not JavaScript-switched hidden pages. Service cards open an accessible native modal, with a link to a full service scope and a prefilled enquiry route. Contact CTAs pass intent, service and audience through URL parameters.
+
+## Meeting bookings
+
+“Book a call”, “Talk to us”, and general-discussion CTAs now open `/book`, a dedicated Westford-branded scheduling page. Existing `/contact?intent=general` links redirect there and preserve service/audience context. Trial and free-review enquiries still use the contact form.
+
+Create a real introductory event with **Calendly** or **Cal.com**, connect your availability and meeting location in the scheduling provider, then set:
+
+```dotenv
+NEXT_PUBLIC_BOOKING_URL=https://calendly.com/your-team/intro-call
+```
+
+You may use a Cal.com event URL instead. Only HTTPS scheduling URLs from those two providers are accepted, so an arbitrary untrusted URL cannot be embedded. The provider owns actual available times, time-zone conversion, meeting confirmations, and calendar invitations. No appointments or time slots are invented in Westford's UI. Without a configured URL, the booking page gracefully offers direct email to arrange a meeting. A configured, working booking URL is **required to enable live reservations**. This website does not automatically create a Calendly/Cal.com account or event.
 
 ## Animation approach
 
