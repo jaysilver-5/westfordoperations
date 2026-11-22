@@ -36,7 +36,7 @@ export function Footer() {
         <Link className="min-h-10 py-2 text-[.78rem] text-muted transition-colors hover:text-teal" href="/agencies">For agencies</Link>
         <Link className="min-h-10 py-2 text-[.78rem] text-muted transition-colors hover:text-teal" href="/brands">For brands</Link>
         <Link className="min-h-10 py-2 text-[.78rem] font-semibold text-teal transition-colors hover:text-ink" href={enquiryHref('trial')}>Try 2 weeks free</Link>
-        <Link className="min-h-10 py-2 text-[.78rem] text-muted transition-colors hover:text-teal" href={enquiryHref('general')}>Let’s talk</Link>
+        <Link className="min-h-10 py-2 text-[.78rem] text-muted transition-colors hover:text-teal" href={enquiryHref('general')}>Book a meeting</Link>
       </nav>
     </div>
     <div className="shell flex flex-col items-center justify-between gap-1 py-4 text-center text-[.7rem] text-muted sm:flex-row sm:text-left">
