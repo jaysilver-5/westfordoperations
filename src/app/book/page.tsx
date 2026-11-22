@@ -6,7 +6,7 @@ import { SERVICE_OPTIONS } from '@/lib/enquiry';
 import { enquiryHref } from '@/lib/links';
 
 export const metadata: Metadata = {
-  title: 'Book a Meeting | Westford Operations',
+  title: 'Talk to Us | Westford Operations',
   description: 'Choose a meeting time with Westford Operations. Book directly and receive a calendar invitation.',
 };
 
@@ -22,7 +22,7 @@ export default async function BookPage({ searchParams }: { searchParams: Promise
 
   return <main id="main-content" className="shell pb-20 pt-11 sm:pb-24 sm:pt-16 lg:pt-20">
     <div className="mb-11 max-w-[850px] sm:mb-12">
-      <p className="eyebrow">Book a meeting</p>
+      <p className="eyebrow">Talk to us</p>
       <h1 className="mt-4 font-editorial text-[clamp(3rem,5.5vw,4.75rem)] leading-[1.08] tracking-[-.035em] text-balance">
         Let’s talk about your <em className="font-normal text-teal">operations.</em>
       </h1>
@@ -34,9 +34,9 @@ export default async function BookPage({ searchParams }: { searchParams: Promise
     <div className="grid items-stretch gap-5 lg:grid-cols-[.72fr_1.28fr] lg:gap-7">
       <aside className="rounded-2xl bg-forest p-7 text-white sm:p-9 lg:p-10">
         <p className="text-[.7rem] font-bold uppercase tracking-[.14em] text-[#c7dacd]">Introductory meeting</p>
-        <h2 className="mt-4 font-editorial text-[2.35rem] leading-[1.14] tracking-[-.02em]">A useful first conversation.</h2>
+        <h2 className="mt-4 font-editorial text-[2.35rem] leading-[1.14] tracking-[-.02em]">Start with a conversation.</h2>
         <p className="mt-4 text-[.86rem] leading-[1.9] text-[#d1ded9]">
-          A chance to understand how things run today, the challenges you’re facing and the kind of support you need.
+          Tell us how work is handled today and where extra support would make a difference. We’ll discuss the best way to work together.
         </p>
 
         {(service || audienceLabel) && <div className="mt-7 border-t border-white/20 pt-6">
@@ -74,7 +74,7 @@ export default async function BookPage({ searchParams }: { searchParams: Promise
             <CalendarDays size={22} strokeWidth={1.7} className="shrink-0 text-teal" aria-hidden="true" />
             <div>
               <h2 id="booking-heading" className="text-[1.03rem] font-bold tracking-[-.015em]">Select an available time</h2>
-              <p className="mt-1 text-[.78rem] text-muted">Dates and times come directly from our calendar.</p>
+              <p className="mt-1 text-[.78rem] text-muted">Choose an open slot and confirm your booking.</p>
             </div>
           </div>
         </div>
