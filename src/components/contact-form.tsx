@@ -85,7 +85,7 @@ export function ContactForm({ initialIntent, initialService, initialAudience }: 
         <span className="inline-flex size-11 items-center justify-center rounded-full bg-[#e8f0e7] text-teal"><Check size={21} aria-hidden="true" /></span>
         <h2 className="mt-5 font-editorial text-[2.7rem] leading-[1.13]">Request sent.</h2>
         <p className="mt-3 text-[.95rem] leading-[1.8] text-muted">
-          Thank you. We’ve received your request and will get back to you by email.
+          Thank you. Your request has been sent. We'll follow up by email.
         </p>
         <Link href="/" className="text-cta mt-6">Back to homepage <ArrowUpRight size={17} aria-hidden="true" /></Link>
       </div> : <form onSubmit={handleSubmit} aria-busy={sending} className="max-w-[730px]">
