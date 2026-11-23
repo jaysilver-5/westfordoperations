@@ -60,12 +60,13 @@ const escapeHtml = (value: string) => value
 
 /** A readable inbox notification with escaped user input and a plain-text alternative. */
 export function enquiryHtml(fields: EnquiryFields, label: string): string {
+  const audienceNames: Record<string, string> = { agency: 'E-commerce agency', brand: 'E-commerce brand', other: 'Other business' };
   const rows: [string, string][] = [
     ['Name', fields.name],
     ['Email', fields.email],
     ['Company', fields.company],
     ...(fields.audience && fields.audience !== 'unspecified'
-      ? [['Business', { agency: 'E-commerce agency', brand: 'E-commerce brand', other: 'Other business' }[fields.audience] || 'Other business'] as [string, string]]
+      ? [['Business', audienceNames[fields.audience] || 'Other business'] as [string, string]]
       : []),
     ...(fields.service && fields.service !== 'unsure'
       ? [['Support area', SERVICE_OPTIONS.find(([key]) => key === fields.service)?.[1] || 'General operations'] as [string, string]]
