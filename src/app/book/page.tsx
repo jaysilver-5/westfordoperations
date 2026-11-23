@@ -4,13 +4,16 @@ import { ArrowUpRight, CalendarDays } from 'lucide-react';
 import { BookingEmbed } from '@/components/booking-embed';
 import { normalizeBookingUrl } from '@/lib/booking';
 
+// Public Cal.com profile supplied by Westford. An environment variable can override it.
+export const defaultBookingUrl = 'https://cal.com/westford';
+
 export const metadata: Metadata = {
   title: 'Talk to Us | Westford Operations',
   description: 'Choose an available date and time to speak with Westford Operations. Confirm your meeting and receive a calendar invitation.',
 };
 
 export default function BookPage() {
-  const bookingUrl = normalizeBookingUrl(process.env.BOOKING_URL || process.env.NEXT_PUBLIC_BOOKING_URL);
+  const bookingUrl = normalizeBookingUrl(process.env.BOOKING_URL || process.env.NEXT_PUBLIC_BOOKING_URL || defaultBookingUrl);
 
   return <main id="main-content" className="pb-20 pt-5 sm:pb-24 sm:pt-9">
     <div className="shell">

@@ -46,7 +46,7 @@ export async function POST(request: Request) {
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json', 'Idempotency-Key': `westford-enquiry/${details.requestId}` },
       body: JSON.stringify({
         from: `Westford Operations <${sender}>`, to: [recipient], reply_to: details.email,
-        subject: `${enquiryLabels[details.intent]} — ${details.company.replace(/[\r\n]/g, ' ')}`,
+        subject: `${enquiryLabels[details.intent]}: ${(details.company || details.name).replace(/[\r\n]/g, ' ')}`,
         text: enquiryText(details, enquiryLabels[details.intent]),
         html: enquiryHtml(details, enquiryLabels[details.intent]),
       }),

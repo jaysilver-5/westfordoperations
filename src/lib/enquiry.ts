@@ -25,7 +25,7 @@ export function parseEnquiry(value: unknown): EnquirySubmission | null {
     if (typeof input[key] !== 'string' || input[key].length > max) return null;
     fields[key] = input[key].trim();
   }
-  if (!fields.name || !fields.company || !fields.challenge) return null;
+  if (!fields.name || !fields.challenge) return null;
   if (!/^[^\s@<>,;:"\r\n]+@[^\s@<>,;:"\r\n]+\.[^\s@<>,;:"\r\n]+$/.test(fields.email)) return null;
   if (!['agency', 'brand', 'other', 'unspecified'].includes(fields.audience)) return null;
   if (!SERVICE_OPTIONS.some(([key]) => key === fields.service)) return null;
@@ -39,8 +39,9 @@ export function enquiryText(fields: EnquiryFields, label: string): string {
   const audiences: Record<string, string> = { agency: 'E-commerce agency', brand: 'E-commerce brand', other: 'Other business' };
   const service = SERVICE_OPTIONS.find(([key]) => key === fields.service)?.[1] ?? 'Not selected';
   return [
-    'WESTFORD OPERATIONS — ENQUIRY', '', `Type: ${label}`,
-    `Name: ${fields.name.trim()}`, `Work email: ${fields.email.trim()}`, `Company: ${fields.company.trim()}`,
+    'WESTFORD OPERATIONS: ENQUIRY', '', `Type: ${label}`,
+    `Name: ${fields.name.trim()}`, `Work email: ${fields.email.trim()}`,
+    ...(fields.company ? [`Company: ${fields.company.trim()}`] : []),
     ...(fields.audience === 'unspecified' ? [] : [`Business: ${audiences[fields.audience] ?? 'Not specified'}`]),
     ...(fields.service === 'unsure' ? [] : [`Area of support: ${service}`]),
     '', 'Current challenge:', fields.challenge.trim(),
@@ -64,7 +65,7 @@ export function enquiryHtml(fields: EnquiryFields, label: string): string {
   const rows: [string, string][] = [
     ['Name', fields.name],
     ['Email', fields.email],
-    ['Company', fields.company],
+    ...(fields.company ? [['Company', fields.company] as [string, string]] : []),
     ...(fields.audience && fields.audience !== 'unspecified'
       ? [['Business', audienceNames[fields.audience] || 'Other business'] as [string, string]]
       : []),

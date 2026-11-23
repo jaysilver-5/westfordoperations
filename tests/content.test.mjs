@@ -85,7 +85,11 @@ test('editorial service list still provides the full interactive service scopes'
   assert.match(cards, /aria-haspopup="dialog"/);
   assert.match(cards, /onClick=\{\(\) => setSelected\(card\.key\)\}/);
   assert.match(cards, /<dialog ref=\{dialogRef\}/);
-  assert.ok(hero.includes('Try Westford free for 2 weeks'));
+  assert.ok(hero.includes('Start a free trial'));
+  assert.ok(hero.includes('We’ll handle the details.'));
+  assert.ok(!hero.includes('id="everyday"'));
+  assert.ok(!hero.includes('id="principles"'));
+  assert.ok(!hero.includes('h.services.note'));
   assert.ok(hero.includes('href="/book"'));
 });
 
@@ -97,4 +101,33 @@ test('website email delivery cannot silently target an imaginary default mailbox
   assert.ok(api.includes('process.env.CONTACT_FROM_EMAIL'));
   assert.ok(api.includes('process.env.RESEND_API_KEY'));
   assert.ok(api.includes('enquiryHtml(details'));
+});
+
+test('minimal contact form asks only for necessary details', () => {
+  const form = readFileSync(join(root, 'src/components/contact-form.tsx'), 'utf8');
+  const fields = ['challenge', 'name', 'email', 'company'];
+  for (const name of fields) assert.ok(form.includes(`name="${name}"`));
+  assert.ok(form.includes('Business name'));
+  assert.ok(form.includes('(optional)'));
+  assert.ok(!form.includes('name="website"'));
+  assert.ok(!form.includes('name="audience"'));
+  assert.ok(!form.includes('Select your business'));
+  assert.ok(form.indexOf('name="challenge"') < form.indexOf('name="email"'));
+});
+
+test('no em dashes remain in public website source or email copy', () => {
+  const files = [
+    'src/app/page.tsx', 'src/components/contact-form.tsx', 'src/lib/enquiry.ts',
+    'src/app/api/enquiry/route.ts', 'src/data/content.json', 'README.md',
+  ];
+  for (const file of files) {
+    const source = readFileSync(join(root, file), 'utf8');
+    assert.equal(source.includes(String.fromCharCode(8212)), false, `em dash in ${file}`);
+  }
+});
+
+test('Westford profile link is the default booking destination', () => {
+  const booking = readFileSync(join(root, 'src/app/book/page.tsx'), 'utf8');
+  assert.ok(booking.includes('https://cal.com/westford'));
+  assert.ok(booking.includes('normalizeBookingUrl'));
 });

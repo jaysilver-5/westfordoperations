@@ -1,4 +1,4 @@
-# Westford Operations — Next.js + Tailwind
+# Westford Operations: Next.js website
 
 A responsive Next.js website for Westford Operations, an e-commerce operations service. The design uses restrained editorial typography, readable layouts, and clear paths for service enquiries or direct meeting bookings.
 
@@ -33,7 +33,7 @@ For deployment: push to GitHub, import the repo into Vercel (framework: Next.js)
 
 | Route | Content |
 | --- | --- |
-| `/` | Hero, everyday workflow pain points, six services, five-step process, agency offering, controls, two-week trial offer |
+| `/` | Editorial hero, six services, working process, agency support and a short trial CTA |
 | `/services` | Service directory, detailed scopes, included vs specialist work, FAQs |
 | `/agencies` | Agency delivery, white-label positioning, workflow and FAQs |
 | `/brands` | Brand support, workflows and FAQs |
@@ -50,13 +50,15 @@ The **Talk to us** button in the header and mobile menu goes directly to the sch
 
 “Book a call”, “Talk to us”, and general-discussion CTAs open `/book`, where the live booking calendar is the first primary element, above supporting copy. Existing `/contact?intent=general` links redirect there and preserve service/audience context. Trial and free-review enquiries still use the contact form.
 
-To enable actual bookings, create an introductory event with **Calendly** or **Cal.com**. Connect the host's real calendar, set availability and time zone, choose the meeting location (a video-call link or phone call), and enable automatic calendar invitations and booking confirmations. Make sure the event allows instant booking without manual approval. Then configure:
+The booking page now defaults to the public Cal.com profile supplied by Westford: **https://cal.com/westford**. Cal.com supports embedding an account's public profile as well as a specific event. Create at least one public, bookable event on that profile and connect the host's real calendar, availability, meeting location and automatic calendar invitations. No API token is required for the public embed.
+
+You can later override the default with a specific Cal.com or Calendly event link in your hosting environment:
 
 ```dotenv
-BOOKING_URL=https://cal.com/your-team/intro
+BOOKING_URL=https://cal.com/westford/intro-call
 ```
 
-You may use a Calendly event URL instead. The legacy `NEXT_PUBLIC_BOOKING_URL` setting also works; `BOOKING_URL` is preferred because it is read on the server. Only HTTPS scheduling URLs from those two providers are accepted. The official Cal.com or Calendly inline embedding SDK handles real-time availability, time-zone conversion, the confirmed booking, and sending the attendee a calendar invitation and meeting details. Neither embed needs an API token; an API token is needed only for a separately built custom scheduling integration. Visitors do **not** email Westford to request a call, and Westford never invents available time slots. When no valid event URL is configured, the booking section displays a clear unavailable state rather than an introductory information card. The site cannot create a scheduling provider account or calendar event on its own.
+`BOOKING_URL` is optional, since the provided Cal.com profile is already the default. You may also use a Calendly event URL. The legacy `NEXT_PUBLIC_BOOKING_URL` setting still works; `BOOKING_URL` is preferred because it is read on the server. Only HTTPS scheduling URLs from those two providers are accepted. The official Cal.com or Calendly inline embedding SDK handles real-time availability, time-zone conversion, the confirmed booking, and sending the attendee a calendar invitation and meeting details. Neither embed needs an API token; an API token is needed only for a separately built custom scheduling integration. Visitors do **not** email Westford to request a call, and Westford never invents available time slots. When a configured override is invalid, the booking section shows an unavailable state rather than invented times. The site cannot create a scheduling provider account or calendar event on its own.
 
 ## Animation approach
 
@@ -76,7 +78,7 @@ Designed mobile-first, including small screens (~320px), tablet, desktop and lar
 
 ## Business email and trial requests
 
-The free-trial and free-review form sends its data to `POST /api/enquiry`. The server validates the request, blocks obvious spam, and uses the **Resend HTTPS email API** to notify the configured Westford inbox. Both a clean HTML email and a plain-text version are sent, with the visitor's email set as Reply-To. A successful response means Resend **accepted** the message; final inbox delivery must be checked separately.
+The streamlined free-trial and free-review form asks for a message, name, email and optional business name. It sends its data to `POST /api/enquiry`. The server validates the request, blocks obvious spam, and uses the **Resend HTTPS email API** to notify the configured Westford inbox. Both a clean HTML email and a plain-text version are sent, with the visitor's email set as Reply-To. A successful response means Resend **accepted** the message; final inbox delivery must be checked separately.
 
 ### Activate delivery on Vercel
 

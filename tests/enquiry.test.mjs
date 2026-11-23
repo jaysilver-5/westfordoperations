@@ -24,7 +24,8 @@ const request = (body = valid(), origin = 'https://westford.example') => new Req
 test('server validation accepts the full trial enquiry and rejects malformed or spam inputs', () => {
   assert.equal(enquiry.parseEnquiry(valid()).intent, 'trial');
   assert.equal(enquiry.parseEnquiry({ ...valid(), audience: 'unspecified' }).audience, 'unspecified');
-  for (const changes of [{ email: 'invalid' }, { email: 'alex@example.test\nBcc:other@example.test' }, { company: '' }, { challenge: 'x'.repeat(2001) }, { intent: 'unknown' }, { audience: 'invalid' }, { service: 'invalid' }, { requestId: 'bad-id' }, { websiteConfirm: 'spam' }]) {
+  assert.equal(enquiry.parseEnquiry({ ...valid(), company: '' }).company, '');
+  for (const changes of [{ email: 'invalid' }, { email: 'alex@example.test\nBcc:other@example.test' }, { challenge: 'x'.repeat(2001) }, { intent: 'unknown' }, { audience: 'invalid' }, { service: 'invalid' }, { requestId: 'bad-id' }, { websiteConfirm: 'spam' }]) {
     assert.equal(enquiry.parseEnquiry({ ...valid(), ...changes }), null);
   }
 });
@@ -46,6 +47,20 @@ test('HTML notifications preserve form details without rendering user-supplied m
   assert.match(html, /&amp; order tracking/);
   assert.match(html, /<br>Two areas/);
   assert.doesNotMatch(html, /<script>|<strong>help/);
+});
+
+test('enquiries work when the optional company field is blank', async () => {
+  let outgoing;
+  const submit = route({ provider: async (_url, options) => {
+    outgoing = JSON.parse(options.body);
+    return Response.json({ id: 'accepted-message' });
+  } });
+  const response = await submit(request({ ...valid(), company: '' }));
+  assert.equal(response.status, 200);
+  assert.equal((await response.json()).ok, true);
+  assert.match(outgoing.subject, /Alex Example/);
+  assert.doesNotMatch(outgoing.text, /Company:/);
+  assert.equal(outgoing.reply_to, 'alex@example.test');
 });
 
 test('throttle limits repeated requests per client and expires after ten minutes', () => {
