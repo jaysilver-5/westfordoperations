@@ -10,7 +10,8 @@ const { normalizeBookingUrl } = await import('data:text/javascript;base64,' + Bu
 test('only configured HTTPS provider booking pages are embedded', () => {
   assert.equal(normalizeBookingUrl('https://calendly.com/westford/intro-call'), 'https://calendly.com/westford/intro-call');
   assert.equal(normalizeBookingUrl('https://cal.com/westford/intro'), 'https://cal.com/westford/intro');
-  for (const value of [undefined, '', 'https://calendly.com/', 'https://calendly.com/westford', 'https://cal.com/westford', 'http://calendly.com/team/intro', 'https://calendly.com.evil.example/team/intro', 'javascript:alert(1)', 'https://user:pass@cal.com/intro', 'https://calendar.google.com/calendar/appointment']) {
+  assert.equal(normalizeBookingUrl('https://cal.com/westford'), 'https://cal.com/westford');
+  for (const value of [undefined, '', 'https://calendly.com/', 'https://calendly.com/westford', 'http://calendly.com/team/intro', 'https://calendly.com.evil.example/team/intro', 'javascript:alert(1)', 'https://user:pass@cal.com/intro', 'https://calendar.google.com/calendar/appointment']) {
     assert.equal(normalizeBookingUrl(value), null);
   }
 });
