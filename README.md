@@ -48,7 +48,7 @@ The header and footer navigate to **real Next.js routes**, not JavaScript-switch
 The **Talk to us** button in the header and mobile menu goes directly to the scheduling page. The booking widget collects the attendee's details, lets them choose a confirmed available time, and (once configured) sends the invitation using the scheduling provider. No Westford enquiry email is required or sent to schedule meetings.
 
 
-“Book a call”, “Talk to us”, and general-discussion CTAs now open `/book`, a dedicated Westford-branded scheduling page. Existing `/contact?intent=general` links redirect there and preserve service/audience context. Trial and free-review enquiries still use the contact form.
+“Book a call”, “Talk to us”, and general-discussion CTAs open `/book`, where the live booking calendar is the first primary element, above supporting copy. Existing `/contact?intent=general` links redirect there and preserve service/audience context. Trial and free-review enquiries still use the contact form.
 
 To enable actual bookings, create an introductory event with **Calendly** or **Cal.com**. Connect the host's real calendar, set availability and time zone, choose the meeting location (a video-call link or phone call), and enable automatic calendar invitations and booking confirmations. Make sure the event allows instant booking without manual approval. Then configure:
 
@@ -56,7 +56,7 @@ To enable actual bookings, create an introductory event with **Calendly** or **C
 BOOKING_URL=https://cal.com/your-team/intro
 ```
 
-You may use a Calendly event URL instead. The legacy `NEXT_PUBLIC_BOOKING_URL` setting also works; `BOOKING_URL` is preferred because it is read on the server. Only HTTPS scheduling URLs from those two providers are accepted. The provider handles real-time availability, time-zone conversion, the confirmed booking, and sending the attendee a calendar invitation and meeting details. Visitors do **not** email Westford to request a call, and Westford never invents available time slots. When no valid event URL is configured, the page clearly states that online booking is not yet available. The site cannot create a scheduling provider account or calendar event on its own.
+You may use a Calendly event URL instead. The legacy `NEXT_PUBLIC_BOOKING_URL` setting also works; `BOOKING_URL` is preferred because it is read on the server. Only HTTPS scheduling URLs from those two providers are accepted. The official Cal.com or Calendly inline embedding SDK handles real-time availability, time-zone conversion, the confirmed booking, and sending the attendee a calendar invitation and meeting details. Neither embed needs an API token; an API token is needed only for a separately built custom scheduling integration. Visitors do **not** email Westford to request a call, and Westford never invents available time slots. When no valid event URL is configured, the booking section displays a clear unavailable state rather than an introductory information card. The site cannot create a scheduling provider account or calendar event on its own.
 
 ## Animation approach
 
@@ -116,6 +116,7 @@ src/
     service-cards.tsx    # Service grid with scope dialogs
     audience-page.tsx    # Reusable agencies/brands page layout
     contact-form.tsx     # Short, open-ended enquiry form
+    booking-embed.tsx    # Official inline Cal.com / Calendly integration
   data/content.json      # Original HTML copy, extracted faithfully
   lib/links.ts           # Typed, prefilled contact and booking URL helper
   lib/booking.ts         # Trusted scheduling-provider link validation
