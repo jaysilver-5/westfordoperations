@@ -35,6 +35,19 @@ test('open-ended enquiries do not silently invent a business category or single-
   assert.match(summary, /Order follow-ups/);
 });
 
+test('HTML notifications preserve form details without rendering user-supplied markup', () => {
+  const html = enquiry.enquiryHtml({
+    ...valid(),
+    company: 'Example <script>alert(1)</script>',
+    challenge: 'We need <strong>help</strong> & order tracking.\\nTwo areas.',
+  }, 'Two-week free trial');
+  assert.match(html, /&lt;script&gt;/);
+  assert.match(html, /&lt;strong&gt;help&lt;\\/strong&gt;/);
+  assert.match(html, /&amp; order tracking/);
+  assert.doesNotMatch(html, /<script>|<strong>help<\\/strong>/);
+  assert.match(html, /Two areas/);
+});
+
 test('throttle limits repeated requests per client and expires after ten minutes', () => {
   const allow = enquiry.createEnquiryThrottle();
   for (let i = 0; i < 5; i++) assert.equal(allow('client-a', 100), true);
@@ -55,6 +68,8 @@ test('API sends to the configured inbox, preserves context and sets the visitor 
   assert.equal(sent.email.from, 'Westford Operations <forms@send.westfordoperations.com>');
   assert.equal(sent.email.reply_to, submission.email);
   assert.match(sent.email.text, /E-commerce agency/);
+  assert.match(sent.email.html, /NEW WEBSITE ENQUIRY/);
+  assert.match(sent.email.html, /Order follow-ups/);
   assert.match(sent.email.text, /Orders & fulfilment administration/);
   assert.match(sent.email.subject, /Two-week free trial/);
   assert.equal(sent.options.headers['Idempotency-Key'], `westford-enquiry/${submission.requestId}`);
