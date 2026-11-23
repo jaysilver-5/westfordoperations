@@ -1,11 +1,10 @@
 import { createHash } from 'node:crypto';
-import { contactEmail } from '@/lib/site';
 import { enquiryLabels, normalizeContactEmail } from '@/lib/contact';
 import { createEnquiryThrottle, enquiryText, parseEnquiry } from '@/lib/enquiry';
 
 export const runtime = 'nodejs';
 const allowEnquiry = createEnquiryThrottle();
-const unavailable = 'We couldn’t send your request right now. Please try again or email us directly.';
+const unavailable = 'We couldn’t send your request right now. Please try again shortly.';
 const json = (body: object, status = 200) => Response.json(body, { status, headers: { 'Cache-Control': 'no-store' } });
 
 export async function POST(request: Request) {
@@ -27,10 +26,19 @@ export async function POST(request: Request) {
   const details = parseEnquiry(payload);
   if (!details) return json({ error: 'Please check your contact details and complete the required fields.' }, 400);
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const sender = normalizeContactEmail(process.env.CONTACT_FROM_EMAIL || contactEmail);
-  const recipient = normalizeContactEmail(process.env.CONTACT_TO_EMAIL || contactEmail);
-  if (!apiKey || !sender || !recipient) return json({ error: unavailable }, 503);
+  // Never silently send to a guessed mailbox. A real recipient and a verified
+  // sending address must both be configured as server-only environment variables.
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  const sender = normalizeContactEmail(process.env.CONTACT_FROM_EMAIL);
+  const recipient = normalizeContactEmail(process.env.CONTACT_TO_EMAIL);
+  if (!apiKey || !sender || !recipient) {
+    console.error('Enquiry delivery is not configured', {
+      missingKey: !apiKey,
+      invalidSender: !sender,
+      invalidRecipient: !recipient,
+    });
+    return json({ error: unavailable }, 503);
+  }
 
   try {
     const response = await fetch('https://api.resend.com/emails', {
@@ -43,8 +51,8 @@ export async function POST(request: Request) {
       }),
       signal: AbortSignal.timeout(15000),
     });
-    const result = await response.json() as { id?: unknown };
-    if (!response.ok || typeof result.id !== 'string' || !result.id) {
+    const result = await response.json().catch(() => null) as { id?: unknown } | null;
+    if (!response.ok || typeof result?.id !== 'string' || !result.id) {
       console.error('Enquiry email rejected by provider', { status: response.status });
       return json({ error: unavailable }, 502);
     }
