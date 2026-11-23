@@ -2,13 +2,12 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight, Boxes, ClipboardList, Globe2, Headset, Megaphone, Wrench, X } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, X } from 'lucide-react';
 import { Reveal } from './animations';
 import { enquiryHref } from '@/lib/links';
 
 type Card = { key: string; title: string; description: string; icon: number };
 type Scope = { key: string; title: string; description: string; tasks: string[]; condition: string };
-const icons = [Boxes, ClipboardList, Headset, Globe2, Megaphone, Wrench];
 
 export function ServiceCards({ cards, scopes }: { cards: Card[]; scopes: Scope[] }) {
   const [selected, setSelected] = useState<string | null>(null);
@@ -22,25 +21,28 @@ export function ServiceCards({ cards, scopes }: { cards: Card[]; scopes: Scope[]
   }, [selected]);
 
   return <>
-    <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {cards.map((card, i) => {
-        const Icon = icons[i % icons.length];
-        return <Reveal key={card.key} delay={(i % 3) * .08}>
-          <article className="card-soft group flex h-full flex-col p-5 transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-[#afc3b4] hover:shadow-[0_16px_34px_#17343d12] sm:p-6">
-            <div className="flex items-center justify-between">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#dce5db] bg-[#f0f4ec] text-teal"><Icon size={20} strokeWidth={1.45} aria-hidden="true" /></span>
-              <span className="text-[.65rem] font-semibold tabular-nums text-[#7b8b7e]">{String(i + 1).padStart(2, '0')}</span>
-            </div>
-            <h3 className="mt-4 text-[1rem] font-bold leading-[1.5] tracking-[-.025em]">{card.title}</h3>
-            <p className="mt-2 flex-1 text-[.8rem] leading-[1.8] text-muted">{card.description}</p>
-            <button type="button" onClick={() => setSelected(card.key)} aria-label={`View scope for ${card.title}`} className="mt-4 flex min-h-11 w-full items-center justify-between gap-3 border-t border-line/70 pt-2 text-left text-[.77rem] font-bold transition-colors group-hover:text-teal">
-              View scope <ArrowRight size={17} strokeWidth={1.6} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </button>
-          </article>
-        </Reveal>;
-      })}
+    <div className="mt-9 grid border-t border-line md:grid-cols-2 md:gap-x-12" aria-label="Westford service areas">
+      {cards.map((card, i) => <Reveal key={card.key} delay={(i % 2) * .06} className="border-b border-line py-7 sm:py-8">
+        <article className="h-full">
+          <button
+            type="button"
+            onClick={() => setSelected(card.key)}
+            aria-haspopup="dialog"
+            aria-label={`View scope for ${card.title}`}
+            className="group flex h-full w-full flex-col items-start rounded-sm text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal"
+          >
+            <span className="flex w-full items-center justify-between">
+              <span className="text-[.71rem] font-bold tracking-[.08em] text-teal tabular-nums">{String(i + 1).padStart(2, '0')} / 06</span>
+              <ArrowUpRight size={19} strokeWidth={1.55} className="text-[#748982] transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-teal" aria-hidden="true" />
+            </span>
+            <h3 className="mt-4 font-editorial text-[2rem] leading-[1.15] tracking-[-.02em] text-ink transition-colors group-hover:text-teal sm:text-[2.17rem]">{card.title}</h3>
+            <p className="mt-3 max-w-[440px] flex-1 text-[.87rem] leading-[1.85] text-muted">{card.description}</p>
+            <span className="mt-4 text-[.8rem] font-semibold text-teal underline decoration-[#b7c9bb] underline-offset-4 group-hover:decoration-teal">View scope</span>
+          </button>
+        </article>
+      </Reveal>)}
     </div>
-    <dialog ref={dialogRef} onClose={() => setSelected(null)} onClick={e => { if (e.target === dialogRef.current) setSelected(null); }} aria-labelledby="service-dialog-title" className="m-auto max-h-[calc(100dvh-2rem)] w-[min(650px,calc(100%-2rem))] overflow-y-auto rounded-2xl border border-line bg-ivory p-6 text-ink shadow-[0_25px_100px_#0b272f3d] backdrop:bg-[#102c3699] backdrop:backdrop-blur-[4px] sm:p-10">
+    <dialog ref={dialogRef} onClose={() => setSelected(null)} onClick={e => { if (e.target === dialogRef.current) setSelected(null); }} aria-labelledby="service-dialog-title" className="m-auto max-h-[calc(100dvh-2rem)] w-[min(650px,calc(100%-2rem))] overflow-y-auto rounded-xl border border-line bg-ivory p-6 text-ink shadow-2xl backdrop:bg-[#102c3677] sm:p-10">
       {active && <>
         <button type="button" onClick={() => setSelected(null)} aria-label="Close service details" className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-mist transition-colors hover:bg-[#e0eade]"><X size={19} /></button>
         <p className="eyebrow pr-10">Service scope</p>
