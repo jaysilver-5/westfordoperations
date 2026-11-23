@@ -50,7 +50,12 @@ test('contact experience stays open-ended and meeting booking never falls back t
   assert.match(form, /name="challenge"/);
   assert.doesNotMatch(form, /SERVICE_OPTIONS\.map/);
   assert.doesNotMatch(form, /localStorage/);
-  assert.match(booking, /src=\{bookingUrl\}/);
+  assert.ok(booking.includes('<BookingEmbed url={bookingUrl} />'));
+  assert.ok(booking.indexOf('<BookingEmbed') < booking.indexOf('We’ll talk about your day-to-day operations'));
+  const embed = readFileSync(join(root, 'src/components/booking-embed.tsx'), 'utf8');
+  assert.ok(embed.includes('https://app.cal.com/embed/embed.js'));
+  assert.ok(embed.includes('https://assets.calendly.com/assets/external/widget.js'));
+  assert.doesNotMatch(embed, /API_KEY|Bearer /);
   assert.doesNotMatch(booking, /mailto:|Email to arrange a call|contactEmailHref/);
   assert.doesNotMatch(footer, /Draft storage/);
 });
@@ -60,6 +65,16 @@ test('Talk to us opens the direct meeting booking flow', () => {
   const booking = readFileSync(join(root, 'src/app/book/page.tsx'), 'utf8');
   assert.ok(navigation.includes('href="/book"'));
   assert.match(navigation, /Talk to us/);
-  assert.ok(booking.includes('src={bookingUrl}'));
+  assert.ok(booking.includes('<BookingEmbed url={bookingUrl} />'));
+  assert.ok(booking.indexOf('<BookingEmbed') < booking.indexOf('We’ll talk about your day-to-day operations'));
   assert.doesNotMatch(booking, /mailto:|Email to arrange a call/);
+});
+
+test('calendar-first booking stays visually before supporting copy', () => {
+  const booking = readFileSync(join(root, 'src/app/book/page.tsx'), 'utf8');
+  const firstCalendar = booking.indexOf('<BookingEmbed');
+  const secondaryContent = booking.indexOf('Looking for a free trial instead?');
+  assert.ok(firstCalendar > 0);
+  assert.ok(secondaryContent > firstCalendar);
+  assert.doesNotMatch(booking, /A useful first conversation|What happens next|<aside/);
 });
