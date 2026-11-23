@@ -39,13 +39,13 @@ test('HTML notifications preserve form details without rendering user-supplied m
   const html = enquiry.enquiryHtml({
     ...valid(),
     company: 'Example <script>alert(1)</script>',
-    challenge: 'We need <strong>help</strong> & order tracking.\\nTwo areas.',
+    challenge: 'We need <strong>help</strong> & order tracking.' + String.fromCharCode(10) + 'Two areas.',
   }, 'Two-week free trial');
   assert.match(html, /&lt;script&gt;/);
-  assert.match(html, /&lt;strong&gt;help&lt;\\/strong&gt;/);
+  assert.match(html, /&lt;strong&gt;help/);
   assert.match(html, /&amp; order tracking/);
-  assert.doesNotMatch(html, /<script>|<strong>help<\\/strong>/);
-  assert.match(html, /Two areas/);
+  assert.match(html, /<br>Two areas/);
+  assert.doesNotMatch(html, /<script>|<strong>help/);
 });
 
 test('throttle limits repeated requests per client and expires after ten minutes', () => {
