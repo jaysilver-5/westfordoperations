@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { enquiryLabels, normalizeContactEmail } from '@/lib/contact';
-import { createEnquiryThrottle, enquiryText, parseEnquiry } from '@/lib/enquiry';
+import { createEnquiryThrottle, enquiryHtml, enquiryText, parseEnquiry } from '@/lib/enquiry';
 
 export const runtime = 'nodejs';
 const allowEnquiry = createEnquiryThrottle();
@@ -48,6 +48,7 @@ export async function POST(request: Request) {
         from: `Westford Operations <${sender}>`, to: [recipient], reply_to: details.email,
         subject: `${enquiryLabels[details.intent]} — ${details.company.replace(/[\r\n]/g, ' ')}`,
         text: enquiryText(details, enquiryLabels[details.intent]),
+        html: enquiryHtml(details, enquiryLabels[details.intent]),
       }),
       signal: AbortSignal.timeout(15000),
     });
