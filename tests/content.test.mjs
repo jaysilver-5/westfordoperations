@@ -78,3 +78,23 @@ test('calendar-first booking stays visually before supporting copy', () => {
   assert.ok(secondaryContent > firstCalendar);
   assert.doesNotMatch(booking, /A useful first conversation|What happens next|<aside/);
 });
+
+test('editorial service list still provides the full interactive service scopes', () => {
+  const cards = readFileSync(join(root, 'src/components/service-cards.tsx'), 'utf8');
+  const hero = readFileSync(join(root, 'src/app/page.tsx'), 'utf8');
+  assert.match(cards, /aria-haspopup="dialog"/);
+  assert.match(cards, /onClick=\{\(\) => setSelected\(card\.key\)\}/);
+  assert.match(cards, /<dialog ref=\{dialogRef\}/);
+  assert.ok(hero.includes('Try Westford free for 2 weeks'));
+  assert.ok(hero.includes('href="/book"'));
+});
+
+test('website email delivery cannot silently target an imaginary default mailbox', () => {
+  const site = readFileSync(join(root, 'src/lib/site.ts'), 'utf8');
+  const api = readFileSync(join(root, 'src/app/api/enquiry/route.ts'), 'utf8');
+  assert.doesNotMatch(site, /\?\? 'hello@westfordoperations\.com'/);
+  assert.ok(api.includes('process.env.CONTACT_TO_EMAIL'));
+  assert.ok(api.includes('process.env.CONTACT_FROM_EMAIL'));
+  assert.ok(api.includes('process.env.RESEND_API_KEY'));
+  assert.ok(api.includes('enquiryHtml(details'));
+});
