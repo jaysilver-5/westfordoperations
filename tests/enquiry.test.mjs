@@ -10,12 +10,12 @@ const enquiry = await import(`data:text/javascript;base64,${Buffer.from(compile(
 const contact = await import(`data:text/javascript;base64,${Buffer.from(compile('../src/lib/contact.ts')).toString('base64')}`);
 const valid = () => ({ name: 'Alex Example', email: 'alex@example.test', company: 'Example Store', audience: 'agency', service: 'orders', challenge: 'Order follow-ups & returns.', website: '', platform: '', workload: '', intent: 'trial', requestId: crypto.randomUUID(), websiteConfirm: '' });
 
-function route({ apiKey = 'test-only-key', provider = async () => Response.json({ id: 'test-message-id' }) } = {}) {
+function route({ apiKey = 'test-only-key', sender = 'forms@send.westfordoperations.com', recipient = 'support@westfordoperations.com', provider = async () => Response.json({ id: 'test-message-id' }) } = {}) {
   const module = { exports: {} };
-  const deps = { 'node:crypto': crypto, '@/lib/site': { contactEmail: 'hello@westfordoperations.com' }, '@/lib/contact': contact, '@/lib/enquiry': enquiry };
+  const deps = { 'node:crypto': crypto, '@/lib/contact': contact, '@/lib/enquiry': enquiry };
   runInNewContext(compile('../src/app/api/enquiry/route.ts', ts.ModuleKind.CommonJS), {
     module, exports: module.exports, require: (name) => { if (!deps[name]) throw new Error(`Unexpected dependency ${name}`); return deps[name]; },
-    Response, URL, AbortSignal, fetch: provider, process: { env: { RESEND_API_KEY: apiKey } }, console: { error() {} },
+    Response, URL, AbortSignal, fetch: provider, process: { env: { RESEND_API_KEY: apiKey, CONTACT_FROM_EMAIL: sender, CONTACT_TO_EMAIL: recipient } }, console: { error() {} },
   });
   return module.exports.POST;
 }
@@ -35,6 +35,19 @@ test('open-ended enquiries do not silently invent a business category or single-
   assert.match(summary, /Order follow-ups/);
 });
 
+test('HTML notifications preserve form details without rendering user-supplied markup', () => {
+  const html = enquiry.enquiryHtml({
+    ...valid(),
+    company: 'Example <script>alert(1)</script>',
+    challenge: 'We need <strong>help</strong> & order tracking.' + String.fromCharCode(10) + 'Two areas.',
+  }, 'Two-week free trial');
+  assert.match(html, /&lt;script&gt;/);
+  assert.match(html, /&lt;strong&gt;help/);
+  assert.match(html, /&amp; order tracking/);
+  assert.match(html, /<br>Two areas/);
+  assert.doesNotMatch(html, /<script>|<strong>help/);
+});
+
 test('throttle limits repeated requests per client and expires after ten minutes', () => {
   const allow = enquiry.createEnquiryThrottle();
   for (let i = 0; i < 5; i++) assert.equal(allow('client-a', 100), true);
@@ -51,9 +64,12 @@ test('API sends to the configured inbox, preserves context and sets the visitor 
   assert.equal(response.status, 200);
   assert.equal((await response.json()).ok, true);
   assert.equal(sent.url, 'https://api.resend.com/emails');
-  assert.deepEqual(sent.email.to, ['hello@westfordoperations.com']);
+  assert.deepEqual(sent.email.to, ['support@westfordoperations.com']);
+  assert.equal(sent.email.from, 'Westford Operations <forms@send.westfordoperations.com>');
   assert.equal(sent.email.reply_to, submission.email);
   assert.match(sent.email.text, /E-commerce agency/);
+  assert.match(sent.email.html, /NEW WEBSITE ENQUIRY/);
+  assert.match(sent.email.html, /Order follow-ups/);
   assert.match(sent.email.text, /Orders & fulfilment administration/);
   assert.match(sent.email.subject, /Two-week free trial/);
   assert.equal(sent.options.headers['Idempotency-Key'], `westford-enquiry/${submission.requestId}`);
@@ -63,9 +79,19 @@ test('missing credentials and provider failures never report a submitted request
   let called = false;
   const missing = await route({ apiKey: '', provider: async () => { called = true; } })(request());
   assert.equal(missing.status, 503);
+  for (const missingConfig of [
+    { sender: '' },
+    { recipient: '' },
+    { recipient: 'not-an-address' },
+    { sender: 'unverified' },
+  ]) {
+    const result = await route({ ...missingConfig, provider: async () => { called = true; } })(request());
+    assert.equal(result.status, 503);
+    assert.ok(!(await result.json()).ok);
+  }
   assert.equal(called, false);
   assert.ok(!(await missing.json()).ok);
-  for (const provider of [async () => Response.json({ message: 'private provider error' }, { status: 401 }), async () => { throw new Error('network failure'); }, async () => Response.json({})]) {
+  for (const provider of [async () => Response.json({ message: 'private provider error' }, { status: 401 }), async () => { throw new Error('network failure'); }, async () => Response.json({}), async () => new Response('not-json', { status: 502 })]) {
     const response = await route({ provider })(request());
     assert.equal(response.status, 502);
     const result = await response.json();

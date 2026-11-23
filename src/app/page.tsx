@@ -17,28 +17,33 @@ const principleIcons = [LockKeyhole, ClipboardCheck, BadgeCheck, ShieldCheck];
 
 export default function HomePage() {
   return <main id="main-content">
-    <section id="home" aria-labelledby="hero-heading" className="relative overflow-hidden pt-6 sm:pt-7 lg:pt-8">
-      <div className="hero-ambient pointer-events-none absolute left-1/2 top-5 -z-0 h-72 w-[680px] -translate-x-1/2 rounded-full bg-[#e1e9dd]/55 blur-[100px]" aria-hidden="true" />
-      <div className="shell relative z-10 text-center">
-        <Reveal onLoad delay={0.02}><Eyebrow>{h.hero.eyebrow}</Eyebrow></Reveal>
-        <Reveal onLoad delay={0.13}>
-          <h1 id="hero-heading" className="mx-auto mt-4 max-w-[880px] text-[clamp(2rem,4.1vw,3.375rem)] font-semibold leading-[1.13] tracking-[-.045em] text-balance">
-            Keep your stores moving.<br /> We handle the <em className="font-editorial text-[1.1em] font-normal tracking-[-.035em] text-teal">day-to-day.</em>
-          </h1>
-        </Reveal>
-        <Reveal onLoad delay={0.22}>
-          <p className="copy-muted mx-auto mt-4 max-w-[650px] !text-[.9rem] sm:!text-[.9375rem]">{h.hero.description}</p>
-        </Reveal>
-        <Reveal onLoad delay={0.31} className="mt-5 flex flex-col items-center justify-center gap-2 sm:flex-row sm:gap-6">
-          <EnquiryLink className="w-full max-w-[340px] sm:w-auto" mode="trial">Try Westford free for 2 weeks</EnquiryLink>
-          <ArrowLink className="justify-center" href="/services">Explore our services</ArrowLink>
-        </Reveal>
-        <Reveal onLoad delay={0.38}>
-          <p className="mt-3 text-[.73rem] leading-[1.9] text-[#61726f]">Real support. One agreed workflow. <a href="#free-trial" className="ml-1 font-semibold text-teal underline underline-offset-4 hover:text-ink">See how the free trial works</a></p>
-        </Reveal>
-        <Reveal onLoad delay={0.4} distance={13} className="relative mx-auto mt-6 h-[140px] overflow-hidden rounded-xl shadow-[0_20px_35px_-28px_#17343d88] sm:h-[clamp(150px,25svh,210px)]">
-          <Image src="/images/westford-workspace.webp" fill priority sizes="(max-width: 640px) 94vw, (max-width: 1024px) 90vw, 1120px" alt="A quiet sunlit workspace with a notebook and laptop" className="object-cover object-[center_62%]" />
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-xl border border-ink/5" />
+    <section id="home" aria-labelledby="hero-heading" className="overflow-hidden pb-7 pt-10 sm:pb-10 sm:pt-14 lg:pb-13 lg:pt-18">
+      <div className="shell">
+        <div className="grid items-end gap-7 md:gap-10 lg:grid-cols-[1.2fr_.8fr] lg:gap-16">
+          <Reveal onLoad delay={0.04} className="max-w-[720px]">
+            <Eyebrow>{h.hero.eyebrow}</Eyebrow>
+            <h1 id="hero-heading" className="mt-5 text-[clamp(2.8rem,5.4vw,4.8rem)] font-semibold leading-[1.075] tracking-[-.055em] text-balance">
+              Keep your stores moving.
+              <span className="mt-1 block font-editorial text-[1.08em] font-normal tracking-[-.035em] text-teal">We handle the day-to-day.</span>
+            </h1>
+          </Reveal>
+          <Reveal onLoad delay={0.15} className="max-w-[520px] lg:pb-1">
+            <p className="text-[.96rem] leading-[1.9] text-muted sm:text-[1.04rem]">{h.hero.description}</p>
+            <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-6 lg:flex-col lg:items-start xl:flex-row xl:items-center">
+              <EnquiryLink className="sm:w-auto" mode="trial">Try Westford free for 2 weeks</EnquiryLink>
+              <ArrowLink className="justify-center sm:justify-start" href="/book">Talk to us</ArrowLink>
+            </div>
+          </Reveal>
+        </div>
+        <Reveal onLoad delay={0.21} distance={12} className="relative mt-9 h-[195px] overflow-hidden rounded-xl shadow-[0_18px_45px_-36px_#17343d80] sm:mt-11 sm:h-[250px] lg:mt-14 lg:h-[315px]">
+          <Image
+            src="/images/westford-workspace.webp"
+            fill
+            priority
+            sizes="(max-width: 640px) 94vw, (max-width: 1024px) 90vw, 1120px"
+            alt="Quiet, sunlit workspace with a notebook and laptop"
+            className="object-cover object-center"
+          />
         </Reveal>
       </div>
     </section>
