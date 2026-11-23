@@ -67,7 +67,7 @@ function CalInlineBooking({ url }: { url: string }) {
     const timer = window.setTimeout(() => {
       if (!target.isConnected) return;
       const namespace = 'westford_' + reactId.replace(/[^a-z0-9]/gi, '');
-      const calLink = new URL(url).pathname.replace(/^\\/+|\\/+$/g, '');
+      const calLink = new URL(url).pathname.split('/').filter(Boolean).join('/');
       const cal = getCalApi();
       cal('init', namespace, { origin: 'https://app.cal.com' });
       cal.ns?.[namespace]?.('inline', {
