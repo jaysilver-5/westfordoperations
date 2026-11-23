@@ -76,23 +76,27 @@ Designed mobile-first, including small screens (~320px), tablet, desktop and lar
 
 ## Business email and trial requests
 
-Set your public business address once:
+The free-trial and free-review form sends its data to `POST /api/enquiry`. The server validates the request, blocks obvious spam, and uses the **Resend HTTPS email API** to notify the configured Westford inbox. Both a clean HTML email and a plain-text version are sent, with the visitor's email set as Reply-To. A successful response means Resend **accepted** the message; final inbox delivery must be checked separately.
+
+### Activate delivery on Vercel
+
+Westford can keep **Zoho Mail for receiving email**. Resend is only the sender of automated website enquiry notifications. To avoid disturbing Zoho's existing root-domain MX and SPF records, use a sending-only subdomain (for example `send.westfordoperations.com`) and add exactly the domain-verification DNS records supplied by Resend. Do not replace or duplicate Zoho's MX or root SPF records.
+
+1. Create a Resend account, verify your chosen sending domain, and create a sending API key.
+2. In the Vercel project, add the following **server-only** environment variables to Production:
 
 ```dotenv
-NEXT_PUBLIC_CONTACT_EMAIL=your-address@your-domain.com
+RESEND_API_KEY=...               # private; set in Vercel only, never commit
+CONTACT_FROM_EMAIL=forms@send.westfordoperations.com   # example: must match verified sender domain
+CONTACT_TO_EMAIL=your-real-mailbox@westfordoperations.com # replace with your actual active Zoho inbox
 ```
 
-Use `.env.local` for local development, or add this variable to your existing hosting project's environment settings. Restart the dev server or rebuild/redeploy after changing it: `NEXT_PUBLIC_` values are included at build time. This is a public contact address, never an email password or API key.
+3. Optionally set `NEXT_PUBLIC_CONTACT_EMAIL` to an actual existing public mailbox if it should appear in the footer. It is deliberately **not** used as the notification recipient or as an automatic fallback.
+4. Redeploy so the environment variables are available to the app. Submit one trial request and one free-review request. Check that each appears in Resend's email activity, then confirm reception in your Zoho inbox (and spam folder). Reply to a notification to verify it addresses the visitor, not the sending service.
 
-The shared configuration in `src/lib/site.ts` supplies the footer, direct contact links and form delivery address. The proposed default is `hello@westfordoperations.com`; set `NEXT_PUBLIC_CONTACT_EMAIL` to the actual existing mailbox before launch. An explicitly empty or invalid address hides email links.
+**Important:** Until all three required server-only variables exist and the sending domain is verified, enquiry submissions intentionally report an error; the website never claims success based on a guessed address. No API keys, email passwords or tokens belong in the source code or public environment variables. `CONTACT_TO_EMAIL` must be the exact mailbox that you own.
 
-Visitors can request a two-week trial or free operations review using the concise enquiry form. Trial CTAs open `/contact?intent=trial#contact-form` and preserve any service and audience. Existing `review` and `general` links continue to work.
-
-The contact form sends to `POST /api/enquiry`. The server validates fields and intent, rejects cross-origin and honeypot submissions, applies a bounded per-instance request throttle and sends a plain-text email through Resend. The recipient is configured on the server; a submitted email address is used only as `reply_to`. A request ID prevents duplicate provider sends when retrying the same request. No passwords or mail service keys enter the browser bundle.
-
-Set `RESEND_API_KEY` as a **server-only secret** in `.env.local` / the hosting project and verify your sending domain in Resend. Optional server-only `CONTACT_FROM_EMAIL` and `CONTACT_TO_EMAIL` override the sending and receiving addresses; both default to the public contact address. The receiving mailbox must already exist with your email host. Creating or displaying an address in the site does not create an inbox or change mail DNS records.
-
-Success appears only after the provider accepts the email and returns its message ID. Missing setup, provider failures and timeouts preserve the form and show a retry/direct-email alternative. The UI does not claim the email has arrived in an inbox or that a trial has been activated. Trial scope, workload and start date are agreed separately. The contact form does not store personal details in browser storage. The in-memory throttle is per server instance; configure hosting-level rate limits for distributed abuse protection.
+The endpoint uses per-instance throttling, a honeypot, origin and payload checks, and idempotent request IDs. For heavily distributed production traffic, add a host-level or shared rate limit.
 
 ## Project organization
 
