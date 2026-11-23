@@ -15,23 +15,27 @@ const h = data.home;
 
 export default function HomePage() {
   return <main id="main-content">
-    <section id="home" aria-labelledby="hero-heading" className="pb-10 pt-12 sm:pb-14 sm:pt-18 lg:pt-23">
+    <section id="home" aria-labelledby="hero-heading" className="pb-10 pt-9 sm:pb-12 sm:pt-12 lg:pb-14 lg:pt-14">
       <div className="shell">
-        <Reveal onLoad delay={0.02} className="max-w-[900px]">
-          <Eyebrow>Managed e-commerce operations</Eyebrow>
-          <h1 id="hero-heading" className="mt-5 max-w-[870px] text-[clamp(2.7rem,5.4vw,5rem)] font-semibold leading-[1.08] tracking-[-.053em] text-balance">
-            Keep your stores moving.
-            <span className="block font-editorial text-[1.07em] font-normal italic tracking-[-.035em] text-teal">We’ll handle the details.</span>
-          </h1>
-          <p className="mt-6 max-w-[560px] text-[1rem] leading-[1.85] text-muted sm:text-[1.05rem]">
-            Product updates, orders and customer support, managed with care for growing brands and agencies.
-          </p>
-          <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3">
+        <div className="mx-auto max-w-[840px] text-center">
+          <Reveal onLoad delay={0.03}>
+            <Eyebrow>Managed e-commerce operations</Eyebrow>
+            <h1 id="hero-heading" className="mx-auto mt-5 max-w-[800px] text-[clamp(2.5rem,5vw,4.25rem)] font-semibold leading-[1.1] tracking-[-.052em] text-balance">
+              Keep your stores moving.
+              <span className="block font-editorial text-[1.08em] font-normal italic tracking-[-.03em] text-teal">We’ll handle the details.</span>
+            </h1>
+          </Reveal>
+          <Reveal onLoad delay={0.12}>
+            <p className="mx-auto mt-5 max-w-[570px] text-[.96rem] leading-[1.85] text-muted sm:text-[1.04rem]">
+              Product updates, orders and customer support, managed with care for growing brands and agencies.
+            </p>
+          </Reveal>
+          <Reveal onLoad delay={0.2} className="mt-7 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
             <EnquiryLink mode="trial">Start a free trial</EnquiryLink>
             <ArrowLink href="/book">Talk to us</ArrowLink>
-          </div>
-        </Reveal>
-        <Reveal onLoad delay={0.14} distance={12} className="relative mt-10 h-[190px] overflow-hidden rounded-xl sm:mt-13 sm:h-[270px] lg:h-[330px]">
+          </Reveal>
+        </div>
+        <Reveal onLoad delay={0.25} distance={12} className="relative mx-auto mt-9 h-[190px] overflow-hidden rounded-xl sm:mt-11 sm:h-[260px] lg:mt-12 lg:h-[300px]">
           <Image
             src="/images/westford-workspace.webp"
             fill

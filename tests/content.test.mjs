@@ -43,40 +43,42 @@ test('source logo and hero photograph are bundled', () => {
   }
 });
 
-test('contact experience stays open-ended and meeting booking never falls back to email', () => {
+test('contact form stays open-ended and booking uses a real scheduling link', () => {
   const form = readFileSync(join(root, 'src/components/contact-form.tsx'), 'utf8');
   const booking = readFileSync(join(root, 'src/app/book/page.tsx'), 'utf8');
   const footer = readFileSync(join(root, 'src/components/footer.tsx'), 'utf8');
+
   assert.match(form, /name="challenge"/);
-  assert.doesNotMatch(form, /SERVICE_OPTIONS\.map/);
-  assert.doesNotMatch(form, /localStorage/);
-  assert.ok(booking.includes('<BookingEmbed url={bookingUrl} />'));
-  assert.ok(booking.indexOf('<BookingEmbed') < booking.indexOf('We’ll talk about your day-to-day operations'));
-  const embed = readFileSync(join(root, 'src/components/booking-embed.tsx'), 'utf8');
-  assert.ok(embed.includes('https://app.cal.com/embed/embed.js'));
-  assert.ok(embed.includes('https://assets.calendly.com/assets/external/widget.js'));
-  assert.doesNotMatch(embed, /API_KEY|Bearer /);
-  assert.doesNotMatch(booking, /mailto:|Email to arrange a call|contactEmailHref/);
+  assert.doesNotMatch(form, /SERVICE_OPTIONS\\.map|localStorage/);
+  assert.ok(booking.includes('href={bookingUrl}'));
+  assert.ok(booking.includes('target="_blank"'));
+  assert.ok(booking.includes('https://cal.com/westford'));
+  assert.doesNotMatch(booking, /BookingEmbed|<iframe|mailto:|Email to arrange a call/);
+  assert.ok(!existsSync(join(root, 'src/components/booking-embed.tsx')));
   assert.doesNotMatch(footer, /Draft storage/);
 });
 
-test('Talk to us opens the direct meeting booking flow', () => {
+test('Talk to us opens a Westford appointment card before Cal.com', () => {
   const navigation = readFileSync(join(root, 'src/components/navigation.tsx'), 'utf8');
   const booking = readFileSync(join(root, 'src/app/book/page.tsx'), 'utf8');
   assert.ok(navigation.includes('href="/book"'));
   assert.match(navigation, /Talk to us/);
-  assert.ok(booking.includes('<BookingEmbed url={bookingUrl} />'));
-  assert.ok(booking.indexOf('<BookingEmbed') < booking.indexOf('We’ll talk about your day-to-day operations'));
-  assert.doesNotMatch(booking, /mailto:|Email to arrange a call/);
+  assert.ok(booking.includes('Introductory meeting'));
+  assert.ok(booking.includes('Choose a time'));
+  assert.ok(booking.includes('href={bookingUrl}'));
+  assert.ok(booking.indexOf('Introductory meeting') < booking.indexOf('Choose a time <ArrowUpRight'));
+  assert.ok(booking.includes('Only available appointment times are shown'));
 });
 
-test('calendar-first booking stays visually before supporting copy', () => {
-  const booking = readFileSync(join(root, 'src/app/book/page.tsx'), 'utf8');
-  const firstCalendar = booking.indexOf('<BookingEmbed');
-  const secondaryContent = booking.indexOf('Looking for a free trial instead?');
-  assert.ok(firstCalendar > 0);
-  assert.ok(secondaryContent > firstCalendar);
-  assert.doesNotMatch(booking, /A useful first conversation|What happens next|<aside/);
+test('home hero is centered with concise copy and its original two actions', () => {
+  const hero = readFileSync(join(root, 'src/app/page.tsx'), 'utf8');
+  assert.ok(hero.includes('mx-auto max-w-[840px] text-center'));
+  assert.ok(hero.includes('mx-auto mt-5 max-w-[800px]'));
+  assert.ok(hero.includes('items-center justify-center'));
+  assert.ok(hero.includes('Start a free trial'));
+  assert.ok(hero.includes('Talk to us'));
+  assert.ok(hero.includes('src="/images/westford-workspace.webp"'));
+  assert.ok(hero.indexOf('Keep your stores moving.') < hero.indexOf('src="/images/westford-workspace.webp"'));
 });
 
 test('editorial service list still provides the full interactive service scopes', () => {

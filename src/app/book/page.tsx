@@ -1,56 +1,76 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowUpRight, CalendarDays } from 'lucide-react';
-import { BookingEmbed } from '@/components/booking-embed';
+import { ArrowUpRight, CalendarDays, Check } from 'lucide-react';
 import { normalizeBookingUrl } from '@/lib/booking';
 
-// Public Cal.com profile supplied by Westford. An environment variable can override it.
-export const defaultBookingUrl = 'https://cal.com/westford';
+// A public scheduling profile can be replaced with a specific event URL in Vercel.
+const defaultBookingUrl = 'https://cal.com/westford';
 
 export const metadata: Metadata = {
-  title: 'Talk to Us | Westford Operations',
-  description: 'Choose an available date and time to speak with Westford Operations. Confirm your meeting and receive a calendar invitation.',
+  title: 'Book an Appointment | Westford Operations',
+  description: 'Book a conversation with Westford Operations. Choose an available time and receive your meeting invitation.',
 };
 
 export default function BookPage() {
-  const bookingUrl = normalizeBookingUrl(process.env.BOOKING_URL || process.env.NEXT_PUBLIC_BOOKING_URL || defaultBookingUrl);
+  const bookingUrl = normalizeBookingUrl(
+    process.env.BOOKING_URL || process.env.NEXT_PUBLIC_BOOKING_URL || defaultBookingUrl
+  );
 
-  return <main id="main-content" className="pb-20 pt-5 sm:pb-24 sm:pt-9">
+  return <main id="main-content" className="pb-20 pt-12 sm:pb-24 sm:pt-16">
     <div className="shell">
-      <div className="mb-5 sm:mb-7">
-        <p className="eyebrow">Westford Operations / Meetings</p>
-        <h1 className="mt-2 font-editorial text-[clamp(2.25rem,4.2vw,3.3rem)] leading-[1.1] tracking-[-.025em]">Choose a time to talk.</h1>
-        <p className="mt-2 max-w-[640px] text-[.9rem] leading-7 text-muted">
-          Pick an available time, confirm your details, and receive your calendar invitation.
+      <header className="mx-auto max-w-[720px] text-center">
+        <p className="eyebrow">Talk to Westford</p>
+        <h1 className="mt-4 font-editorial text-[clamp(2.7rem,5.5vw,4.15rem)] leading-[1.09] tracking-[-.03em]">
+          Book a conversation.
+        </h1>
+        <p className="mx-auto mt-4 max-w-[510px] text-[.95rem] leading-[1.85] text-muted">
+          A chance to discuss your operations and see where we can help.
         </p>
-      </div>
+      </header>
 
-      <section aria-label="Meeting calendar" className="-mx-5 overflow-hidden border-y border-[#d9e1d9] bg-ivory sm:mx-0 sm:rounded-2xl sm:border sm:shadow-[0_15px_55px_-38px_#17343d45]">
-        {bookingUrl ? <>
-          <BookingEmbed url={bookingUrl} />
-          <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-2 border-t border-line px-5 py-4 sm:px-8">
-            <p className="text-[.76rem] leading-6 text-muted">Times shown are live and adjusted to your time zone.</p>
-            <a href={bookingUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[.78rem] font-semibold text-teal underline underline-offset-4 hover:text-ink">
-              Open calendar separately <ArrowUpRight size={14} aria-hidden="true" />
-            </a>
+      <section aria-labelledby="appointment-title" className="mx-auto mt-9 max-w-[740px] overflow-hidden rounded-2xl border border-[#d9e1d9] bg-ivory shadow-[0_18px_55px_-44px_#17343d45] sm:mt-11">
+        <div className="flex items-start gap-5 p-6 sm:gap-6 sm:p-9">
+          <div className="flex size-[54px] shrink-0 items-center justify-center rounded-xl bg-[#edf2e9] text-teal sm:size-[62px]">
+            <CalendarDays size={28} strokeWidth={1.5} aria-hidden="true" />
           </div>
-        </> : <div className="flex min-h-[410px] flex-col items-center justify-center px-6 py-14 text-center sm:min-h-[520px]">
-          <CalendarDays size={30} strokeWidth={1.4} className="text-teal" aria-hidden="true" />
-          <h2 className="mt-6 font-editorial text-[2rem] leading-[1.2]">Booking is not available yet.</h2>
-          <p className="mt-3 max-w-[360px] text-[.87rem] leading-[1.8] text-muted">
-            Our scheduling calendar has not been connected. Available appointments will appear here once it is ready.
-          </p>
-        </div>}
+          <div>
+            <p className="text-[.7rem] font-bold uppercase tracking-[.14em] text-teal">Westford Operations</p>
+            <h2 id="appointment-title" className="mt-2 font-editorial text-[clamp(1.8rem,3vw,2.35rem)] leading-[1.18] tracking-[-.02em]">
+              Introductory meeting
+            </h2>
+            <p className="mt-3 max-w-[430px] text-[.88rem] leading-[1.8] text-muted">
+              Tell us about your business and the work you need help managing.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-5 border-t border-line px-6 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-9 sm:py-7">
+          <div className="flex items-start gap-3">
+            <Check size={18} strokeWidth={1.8} className="mt-1 shrink-0 text-teal" aria-hidden="true" />
+            <p className="max-w-[360px] text-[.83rem] leading-[1.8] text-muted">
+              Select a time and confirm your details. Cal.com will handle your calendar invitation.
+            </p>
+          </div>
+          {bookingUrl ? <a
+            href={bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary w-full shrink-0 sm:w-auto sm:min-w-[186px]"
+          >
+            Choose a time <ArrowUpRight size={17} aria-hidden="true" />
+          </a> : <span className="text-[.84rem] font-medium text-muted">Online scheduling is unavailable.</span>}
+        </div>
       </section>
 
-      <div className="mt-7 flex flex-col justify-between gap-3 border-t border-line pt-6 text-[.82rem] leading-7 text-muted sm:flex-row sm:gap-6">
-        <p>We’ll talk about your day-to-day operations and where additional support could help.</p>
-        <p className="shrink-0">No store access or customer data needed.</p>
-      </div>
-      <div className="mt-3 text-[.78rem] text-muted">
-        Looking for a free trial instead?{' '}
-        <Link href="/contact?intent=trial#contact-form" className="font-semibold text-teal underline underline-offset-4 hover:text-ink">Make an enquiry</Link>
-      </div>
+      {bookingUrl && <p className="mx-auto mt-4 max-w-[740px] text-center text-[.75rem] leading-6 text-muted">
+        Booking opens on Cal.com in a new tab. Only available appointment times are shown.
+      </p>}
+      <p className="mx-auto mt-9 max-w-[740px] text-center text-[.83rem] leading-6 text-muted">
+        Prefer to send a message?{' '}
+        <Link href="/contact?intent=review#contact-form" className="font-semibold text-teal underline underline-offset-4 hover:text-ink">
+          Make an enquiry
+        </Link>
+      </p>
     </div>
   </main>;
 }

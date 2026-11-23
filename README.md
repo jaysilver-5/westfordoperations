@@ -39,26 +39,25 @@ For deployment: push to GitHub, import the repo into Vercel (framework: Next.js)
 | `/brands` | Brand support, workflows and FAQs |
 | `/about` | Company positioning, principles, audiences |
 | `/contact` | Concise free trial and review enquiry form, email delivery |
-| `/book` | Branded meeting-scheduling page with live availability from a connected scheduling provider |
+| `/book` | Branded appointment card linking to a live Cal.com or Calendly booking page |
 
 The header and footer navigate to **real Next.js routes**, not JavaScript-switched hidden pages. Service cards open an accessible native modal, with a link to a full service scope and a prefilled enquiry route. Contact CTAs pass intent, service and audience through URL parameters.
 
 ## Meeting bookings
 
-The **Talk to us** button in the header and mobile menu goes directly to the scheduling page. The booking widget collects the attendee's details, lets them choose a confirmed available time, and (once configured) sends the invitation using the scheduling provider. No Westford enquiry email is required or sent to schedule meetings.
+The **Talk to us** navigation action opens the Westford-designed appointment card at `/book`. The page no longer loads a third-party booking widget inside the site. Visitors see the meeting details first, then select **Choose a time** to open the real scheduling page in a new tab.
 
-
-“Book a call”, “Talk to us”, and general-discussion CTAs open `/book`, where the live booking calendar is the first primary element, above supporting copy. Existing `/contact?intent=general` links redirect there and preserve service/audience context. Trial and free-review enquiries still use the contact form.
-
-The booking page now defaults to the public Cal.com profile supplied by Westford: **https://cal.com/westford**. Cal.com supports embedding an account's public profile as well as a specific event. Create at least one public, bookable event on that profile and connect the host's real calendar, availability, meeting location and automatic calendar invitations. No API token is required for the public embed.
-
-You can later override the default with a specific Cal.com or Calendly event link in your hosting environment:
+The booking link defaults to **https://cal.com/westford**. A profile may show one or more public event types before the visitor chooses a time. To go directly to a particular event type, you can override the URL on Vercel with a published event URL:
 
 ```dotenv
 BOOKING_URL=https://cal.com/westford/intro-call
 ```
 
-`BOOKING_URL` is optional, since the provided Cal.com profile is already the default. You may also use a Calendly event URL. The legacy `NEXT_PUBLIC_BOOKING_URL` setting still works; `BOOKING_URL` is preferred because it is read on the server. Only HTTPS scheduling URLs from those two providers are accepted. The official Cal.com or Calendly inline embedding SDK handles real-time availability, time-zone conversion, the confirmed booking, and sending the attendee a calendar invitation and meeting details. Neither embed needs an API token; an API token is needed only for a separately built custom scheduling integration. Visitors do **not** email Westford to request a call, and Westford never invents available time slots. When a configured override is invalid, the booking section shows an unavailable state rather than invented times. The site cannot create a scheduling provider account or calendar event on its own.
+`BOOKING_URL` is optional. The legacy `NEXT_PUBLIC_BOOKING_URL` override also works. A URL validator allows only HTTPS Cal.com or Calendly booking links, preventing arbitrary redirects.
+
+**Booking is handled by Cal.com or Calendly.** The provider owns real availability, time zone conversion, confirmations and calendar invitations. The website does not collect proposed times, send a mailto request, or invent slots. No Cal.com API token or embedded SDK is required. Make sure your booking profile has at least one published event and a connected calendar. Live invitations must be tested on the provider after event setup.
+
+Existing `/contact?intent=general` links redirect to `/book`. Free-trial and free-review enquiries continue to use the separate form and Resend email delivery.
 
 ## Animation approach
 
@@ -122,7 +121,6 @@ src/
     service-cards.tsx    # Service grid with scope dialogs
     audience-page.tsx    # Reusable agencies/brands page layout
     contact-form.tsx     # Short, open-ended enquiry form
-    booking-embed.tsx    # Official inline Cal.com / Calendly integration
   data/content.json      # Original HTML copy, extracted faithfully
   lib/links.ts           # Typed, prefilled contact and booking URL helper
   lib/booking.ts         # Trusted scheduling-provider link validation
